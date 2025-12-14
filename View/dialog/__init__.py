@@ -1,0 +1,2 @@
+def confirmDialog():
+    return None

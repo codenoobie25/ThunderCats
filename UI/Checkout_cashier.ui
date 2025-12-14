@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>420</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog {
+    background-color: #150026;   
+    border: 2px solid #520099;  
+}
+QLabel#Header, QLabel#Header2 {
+    color: #FFD500;             
+    font-size: 16px;            
+    font-weight: bold;
+    border-bottom: 2px solid #520099; 
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+QFrame#frame {
+    background-color: #2A004E;
+    border: 2px solid #FFD500; 
+}
+
+QLabel#headerTotal {          
+    color: #E0C2FF;           
+    font-size: 14px;
+}
+
+QLabel#Totalamountdue {        
+    color: #FFD500;              
+    font-weight: bold;
+    font-size: 36px;             
+}
+
+QLabel#subtotaHeader, QLabel#taxHeader {
+    color: #E0C2FF;             
+    font-size: 14px;
+    font-weight: normal;        
+}
+QLabel#changedues {
+    color: #FFFFFF;             
+    font-size: 18px;           
+    font-weight: bold;          
+}
+QLineEdit#changedue2 {
+    background-color: #FFFFFF;   
+    color: #2A004E;              
+    border: 2px solid #FFD500;   
+    border-radius: 8px;
+    font-size: 24px;           
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+QLabel#changedues {
+    color: #B0A0C0;            
+}
+
+QLabel#totalchange {
+    color: #FFFFFF;              
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+QPushButton#completeOrder {
+    background-color: #FFD500;   
+    color: #2A004E;           
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 15px;
+    border: none;
+}
+
+QPushButton#completeOrder:hover {
+    background-color: #E6C200; 
+}
+
+QPushButton#completeOrder:pressed {
+    background-color: #CCAC00;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QLabel" name="Header">
+     <property name="text">
+      <string>Payment</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="headerTotal">
+        <property name="text">
+         <string>Total Amount Due</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="Totalamountdue">
+        <property name="text">
+         <string>0.00</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Plain</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="subtotaHeader">
+          <property name="text">
+           <string>Subtotal</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="subtotal">
+          <property name="text">
+           <string>0.00</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="taxHeader">
+          <property name="text">
+           <string>Tax(8%)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="taxs">
+          <property name="text">
+           <string>0.00</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="Header2">
+     <property name="text">
+      <string>Cash Tendered</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="changedue2">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>74</height>
+      </size>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string>0.00</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_3">
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Plain</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Change Due:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="changedues">
+        <property name="text">
+         <string>0.00</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="completeOrder">
+     <property name="text">
+      <string>Complete Order</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

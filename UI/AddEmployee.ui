@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>570</width>
+    <height>593</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Add Employee</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../Downloads/50x50.png</normaloff>../../../Downloads/50x50.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QDialog#Dialog {
+    background-color: #2A004E;
+}
+
+QLabel#Header, #Header_2 {
+    color: #FFD500;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+QLabel {
+    color: #E0C2FF; 
+    font-size: 14px;
+}
+
+
+QLineEdit, QComboBox, QDateEdit {
+    background-color: #150026;   
+    color: #FFFFFF;           
+    border: 1px solid #520099;   
+    border-radius: 5px;         
+    padding: 5px;
+    height: 25px;              
+    font-size: 14px;
+}
+
+
+QLineEdit:focus, QComboBox:focus, QDateEdit:focus {
+    border: 2px solid #FFD500;   
+    background-color: #1A0033;   
+}
+
+QComboBox::drop-down, QDateEdit::drop-down {
+    border: none;
+    background: transparent;
+    width: 20px;
+}
+
+QComboBox::down-arrow, QDateEdit::down-arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #FFD500;
+    margin-right: 10px;
+}</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="Header">
+     <property name="text">
+      <string>Add New Employee</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>First Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="Header_2">
+     <property name="text">
+      <string>Address Details</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Phone Number:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Employment Status:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Role/Position</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Last Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="text">
+      <string>Email Address:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Date Joined:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Street Address:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="firstName"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="lastName"/>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="Emailadd"/>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="Rolebox">
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QDateEdit" name="datejoin"/>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="Phonenumber"/>
+   </item>
+   <item row="7" column="1">
+    <widget class="QComboBox" name="empstatus">
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="text">
+      <string>City:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>Province:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Plain</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="addButton">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#addButton {
+    background-color: #FFD500;
+    color: #2A004E;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 11px;
+    border: none;
+    padding: 10px 20px;
+}
+
+QPushButton#addButton:hover {
+    background-color: #E6C200; 
+}
+
+QPushButton#addButton:pressed {
+    background-color: #CCAC00; 
+}</string>
+        </property>
+        <property name="text">
+         <string>Add</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../assets/AddEmployee_icon.svg</normaloff>../assets/AddEmployee_icon.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#cancelButton {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 2px solid #520099;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 10px 20px;
+}
+
+QPushButton#cancelButton:hover {
+    background-color: #520099; 
+    color: #FFFFFF;
+}</string>
+        </property>
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QLineEdit" name="streetAdd"/>
+   </item>
+   <item row="10" column="1">
+    <widget class="QLineEdit" name="city"/>
+   </item>
+   <item row="11" column="1">
+    <widget class="QLineEdit" name="province"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>453</width>
+    <height>337</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+QDialog { 
+    background-color: #150026; 
+    border: 2px solid #FFD500;
+    border-radius: 10px;
+}
+
+
+QLabel {
+    color: #E0C2FF;   
+    font-weight: bold;
+    font-size: 11px;
+}
+QLabel#label1{
+	font-size: 20px;
+}
+QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox {
+    background-color: #3D1459; 
+    color: #FFFFFF;          
+    border: 1px solid #520099;  
+    border-radius: 5px;
+    padding: 8px; 
+    font-size: 14px;
+}
+
+
+QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus {
+    border: 2px solid #FFD500; 
+    background-color: #451B63; 
+}
+
+QSpinBox::up-button, QDoubleSpinBox::up-button,
+QSpinBox::down-button, QDoubleSpinBox::down-button {
+    background-color: #520099; 
+    border-radius: 2px;
+}
+
+QSpinBox::up-button:hover, QSpinBox::down-button:hover {
+    background-color: #FFD500; 
+}</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label1">
+     <property name="text">
+      <string>Add New Product</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Product Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="addproductName"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Category:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="combocategories"/>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Stock Qty:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QSpinBox" name="Stockqty">
+     <property name="minimum">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Price(₱):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QDoubleSpinBox" name="prices">
+     <property name="maximum">
+      <double>999999.989999999990687</double>
+     </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Shape::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Plain</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="addproductButton">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#addproductButton {
+    background-color: #FFD500;
+    color: #2A004E;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 11px;
+    border: none;
+    padding: 10px 20px;
+}
+
+QPushButton#addproductButton:hover {
+    background-color: #E6C200; 
+}
+
+QPushButton#addproductButton:pressed {
+    background-color: #CCAC00; 
+}</string>
+        </property>
+        <property name="text">
+         <string>Add Prodcut</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../assets/AddProduct_icon.svg</normaloff>../assets/AddProduct_icon.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="styleSheet">
+         <string notr="true">QPushButton#cancelButton {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: 2px solid #520099;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 10px 20px;
+}
+
+QPushButton#cancelButton:hover {
+    background-color: #520099; 
+    color: #FFFFFF;
+}</string>
+        </property>
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Warraty:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

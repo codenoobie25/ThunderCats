@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>884</width>
+    <height>521</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Calibri</family>
+       <pointsize>22</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:#ffd500</string>
+     </property>
+     <property name="text">
+      <string>Return Approvals</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tblReturns">
+     <property name="styleSheet">
+      <string notr="true">QTableWidget {
+    background-color: #2A004E; 
+    gridline-color: #5C3278;   
+    color: #E0C2FF;             
+    selection-background-color: #FFD500; 
+    selection-color: #2A004E;           
+}
+
+QHeaderView::section {
+    background-color: #451B63; 
+    color: #FFD500;            
+    border: 1px solid #5C3278;
+    padding: 4px;
+}
+
+QTableWidget::item:hover {
+    background-color: #3A105A; 
+}</string>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>250</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Receipt Number</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Date of Purchase</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Return Date</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Status</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Actions</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
