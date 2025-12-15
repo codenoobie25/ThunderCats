@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QMessageBox
 
-
 class LoginController:
     def __init__(self, login_view, db, main_app):
         self.view = login_view
@@ -19,17 +18,29 @@ class LoginController:
 
         print(f"Controller: Checking {self.username}...")
 
-        # 2. Check DB
-        if self.db.validate_login(self.username, self.password): self.login_success()
-        else:
-            self.login_fail()
+        try:
+            is_valid = self.db.validate_login(self.username, self.password)
+            print(f"DEBUG: Database validation result: {is_valid}")
+
+            if is_valid:
+                self.role = self.db.get_user_type(self.username)
+                self.login_success()
+            else:
+                self.login_fail()
+        except Exception as e:
+            print(f"DEBUG: Login error: {e}")
+            import traceback
+            traceback.print_exc()
+            QMessageBox.critical(self.view, "Login Error", f"System Error: {str(e)}")
 
     def login_success(self):
         print("✅ Login Success!")
-        self.role = self.db.get_user_role()
+        role_tuple =self.db.get_user_type(self.username)
+        print("DEBUG: Database role tuple: {role_tuple}")
+
+        self.role = role_tuple[0]
 
         self.view.close()
-
         self.main_app.show_mainwindow(self.role)
 
     def login_fail(self):

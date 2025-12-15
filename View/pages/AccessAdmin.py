@@ -8,10 +8,3 @@ class AccessAdmin(QWidget):
         loadUi("UI/Accessadmin_page.ui", self)
         print("Access page is loaded ")
 
-        self.addRoles = AddRoles()
-
-        self.Addrole.clicked.connect(self.openAddRoles)
-
-    def openAddRoles(self):
-        addRoles = AddRoles()
-        addRoles.exec()

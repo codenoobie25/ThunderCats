@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QApplication
 
 from Model.database import Database
 from View.mainwindow.loginWindow import Loginwindow
-from View.mainwindow.AdminWindow import AdminWindow
+from View.mainwindow.AdminWindow import AdminWindowUI
 from Controllers.login_controller import LoginController
 from Controllers.admin_controller import Adminwindow
 
@@ -26,16 +26,18 @@ class MainApp:
         self.login_controller = LoginController(self.login_window, self.db, self)
         self.login_window.show()
 
-    def show_mainwindow(self, role,lastname,firstname):
+    def show_mainwindow(self, role):
         print(f"🚀 Switching to {role} Dashboard")
 
+        # Now 'role' should be the string "Admin"
         if role == "Admin":
-            self.admin_window = AdminWindow()
-            self.admin_controller = Adminwindow(self.admin_window,self.db,self, lastname,firstname)
+            self.admin_window = AdminWindowUI()
+            self.admin_controller = Adminwindow(self.admin_window, self.db, self)
             self.admin_window.show()
-
         elif role == "Cashier":
             print("Cashier window coming soon...")
+        else:
+            print(f"⚠️  Unknown role: {role}")
 
     def logout(self):
         print("🔄 return to Login...")

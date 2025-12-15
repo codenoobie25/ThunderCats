@@ -1,39 +1,109 @@
 from PyQt6.QtCore import QTimer, QDateTime, pyqtSignal
 from PyQt6.QtWidgets import QWidget
 from PyQt6.uic import loadUi
-from Model.database import Database
-from View.mainwindow.AdminWindow import AdminWindow
-from View.pages.productlist_admin import ProductListAdmin
-from View.pages.sale_reportAdmin import SaleReportAdmin
-from View.pages.employee_Admin import EmployeeAdmin
+
+from Controllers.access_controller import AccessController
+from Controllers.activityLogs_controller import ActivityLogsController
+from Controllers.approvalreturn_controller import ApprovalReturnController
+from Controllers.employee_controller import EmployeeController
+from Controllers.product_controller import ProductController
+from Controllers.salereport_controller import SaleReportController
 from View.pages.AccessAdmin import AccessAdmin
-from View.dialog.TotalRev_expand import TotalRevDialog
-from View.dialog.TotalItems_Expand import TotalItemDialog
-from View.dialog.Transaction_Expand import TransactionDialog
-from View.dialog.OutStockExpand import OutStockDialog
 from View.pages.ActivityLogsAdmin import ActivitylogsAdmin
 from View.pages.ReturnApproval import Returnapproval
+from View.pages.employee_Admin import EmployeeAdmin
+from View.pages.productlist_admin import ProductListAdmin
+from View.pages.sale_reportAdmin import SaleReport
 
-class Adminwindow(QWidget):
+
+class Adminwindow:
     # logoutSignal = pyqtSignal()
-    def __init__(self,adminwindow,db, application,lastname,firstname):
+    def __init__(self, adminwindow, db, application):
         self.page = adminwindow
         self.db = db
         self.application = application
-        self.lastname = lastname
-        self.firstname = firstname
+        # self.userID = userID
+        # self.usertypr = usertypr
 
         self.pages = None
         self.setup_pages()
+
+        self.productlist_Controller = ProductController(self.pages[0],self)
+        self.salereport_Controller = SaleReportController(self.pages[1],self)
+        self.employee_Controller = EmployeeController(self.pages[2],self)
+        self.access_Controller = AccessController(self.pages[3],self)
+        self.activitylogs_Controller = ActivityLogsController(self.pages[4],self)
+        self.approvalreturn_Controller = ApprovalReturnController(self.pages[5],self)
+
+        # self.setup_labels()
+        #self.setup_buttons()
+        self.setup_navigation()
+        self.setup_clock()
+        self.page.stackedWidget.setCurrentIndex(0)
+
+
+    def setup_navigation(self):
+        print(f"DEBUG: Setting up navigation for {len(self.pages)} pages")
+
+        nav_buttons = {
+            self.page.Dashboard2: 0,
+            self.page.Productlist: 1,
+            self.page.SaleReport: 2,
+            self.page.Employee: 3,
+            self.page.Access: 4,
+            self.page.Activitylogs:5,
+            self.page.Returnapprovals:6
+        }
+        for button,page_index in nav_buttons.items():
+            if button:
+
+                 button.clicked.connect(lambda checked, index=page_index:
+                                       self.page.stackedWidget.setCurrentIndex(index))
+                 print(f"DEBUG: Connected {button.objectName()} -> Index {page_index}")
+
+        print(f"DEBUG: StackedWidget has {self.page.stackedWidget.count()} total pages")
+
     def setup_pages(self):
-        self.pages =[
-        ProductListAdmin(),
-        SaleReportAdmin()
+        self.pages = [
+            ProductListAdmin(),
+            SaleReport(),
+            EmployeeAdmin(),
+            AccessAdmin(),
+            ActivitylogsAdmin(),
+            Returnapproval()
         ]
         for page in self.pages:
             self.page.stackedWidget.addWidget(page)
+        print(f"DEBUG: Added {len(self.pages)} pages. Total pages: {self.page.stackedWidget.count()}")
+        print(f"DEBUG: Index 0 = Dashboard (from UI), Index 1 = {type(self.pages[0]).__name__}")
 
+    def setup_clock(self):
+        current = QDateTime.currentDateTime()
 
+        if hasattr(self.page, 'dateEdit'):
+                self.page.dateEdit.setDate(current.date())
+
+        if hasattr(self.page, 'timeEdit'):
+                self.page.timeEdit.setTime(current.time())
+
+            # Create timer to update every second
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update_clock)
+        self.timer.start(1000)  # Update every 1000ms (1 second)
+
+        print("DEBUG: Real-time clock started")
+
+    def update_clock(self):
+
+        current = QDateTime.currentDateTime()
+
+        if hasattr(self.page, 'timeEdit'):
+            self.page.timeEdit.setTime(current.time())
+
+        if hasattr(self.page, 'dateEdit'):
+            if current.time().hour() == 0 and current.time().minute() == 0:
+                self.page.dateEdit.setDate(current.date())
+        # Call it in __init__ after setup_navigation():
 
     #     # Dashboard Pages
     #     self.page_productlist = ProductListAdmin()

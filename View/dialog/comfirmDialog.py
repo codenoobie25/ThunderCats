@@ -3,7 +3,6 @@ from PyQt6.QtWidgets import QDialog
 from PyQt6.uic import loadUi
 from PyQt6.QtCore import pyqtSignal, Qt
 
-
 class ConfirmDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)

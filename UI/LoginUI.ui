@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>1090</width>
-    <height>505</height>
+    <height>531</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1080</width>
-    <height>505</height>
+    <height>531</height>
    </size>
   </property>
   <property name="palette">
@@ -490,7 +490,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Downloads/50x50.png</normaloff>../../../Downloads/50x50.png</iconset>
+    <normaloff>../assets/50x50.png</normaloff>../assets/50x50.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -601,6 +601,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_Username">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>39</height>
+        </size>
+       </property>
        <property name="styleSheet">
         <string notr="true">QLineEdit {
     background-color: #ffffff;
@@ -630,6 +636,12 @@
      </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_Password">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>39</height>
+        </size>
+       </property>
        <property name="palette">
         <palette>
          <active>
