@@ -13,7 +13,6 @@ class ProductController:
         self.load_categories()
 
     def setup_ui(self):
-        """Connect UI signals to controller methods"""
         # Connect add button
         self.productlist_pages.addProduct.clicked.connect(self.show_add_product_dialog)
 
@@ -26,11 +25,9 @@ class ProductController:
         self.productlist_pages.product_table.customContextMenuRequested.connect(self.show_context_menu)
 
     def load_products(self):
-        """Load all products into the table"""
         products = self.db.get_all_products()
         table = self.productlist_pages.product_table
 
-        # Clear existing rows
         table.setRowCount(0)
 
         # Set column count
@@ -105,7 +102,6 @@ class ProductController:
             self.load_products()  # Refresh table
 
     def show_edit_product_dialog(self, product_id):
-        """Show dialog for editing existing product"""
         from View.dialog.Addproduct import AddProduct
 
         # Get product data
@@ -126,14 +122,14 @@ class ProductController:
             dialog.combocategories.clear()
             for i, (cat_id, cat_name) in enumerate(self.categories):
                 dialog.combocategories.addItem(cat_name, cat_id)
-                if cat_id == product[3]:  # categoryID
+                if cat_id == product[6]:  # categoryID
                     dialog.combocategories.setCurrentIndex(i)
 
         if hasattr(dialog, 'prices'):
-            dialog.prices.setText(str(product[4]))  # price
+            dialog.prices.setValue(float(product[3])) # price
 
         if hasattr(dialog, 'Stockqty'):
-            dialog.Stockqty.setText(str(product[5]))  # stock
+            dialog.Stockqty.setValue(int(product[5])) # stock
 
         if hasattr(dialog, 'warraty'):
             dialog.warraty.setText(str(product[7]))  # warranty
@@ -156,55 +152,93 @@ class ProductController:
             import traceback
             traceback.print_exc()
 
-        
     def save_product(self, dialog):
-        print("Dialog attributes:", [attr for attr in dir(dialog) if not attr.startswith('_')])
-        name = dialog.addproductName.text() if hasattr(dialog, 'addproductName') else ""
-        category_id = dialog.combocategories.currentData() if hasattr(dialog, 'combocategories') else None
-        price = float(dialog.prices.text()) if hasattr(dialog, 'prices') and dialog.price_input.text() else 0
-        stock = int(dialog.Stockqty.text()) if hasattr(dialog, 'Stockqty') and dialog.stock_input.text() else 0
-        warranty = dialog.warraty.text() if hasattr(dialog, 'warraty') else ""
+        """Save new product to database"""
+        try:
+            # Get data from dialog - FIXED: Use consistent attribute names
+            name = dialog.addproductName.text().strip() if hasattr(dialog, 'addproductName') else ""
+            category_id = dialog.combocategories.currentData() if hasattr(dialog, 'combocategories') else None
 
-        sku = self.db.generate_sku()
-        # Validate
-        if not name or not category_id:
-            QMessageBox.warning(self.productlist_pages, "Error", "Please fill all required fields!")
-            return
+            # Fixed: Check the SAME attributes we're accessing
+            price = dialog.prices.value() if hasattr(dialog, 'prices') else 0.0
+            stock = dialog.Stockqty.value() if hasattr(dialog, 'Stockqty') else 0
 
-        # Save to database
-        success = self.db.add_product(name, sku, category_id, price, stock, warranty)
+            warranty = dialog.warraty.text() if hasattr(dialog, 'warraty') else ""
+            # Validate
+            if not name or not category_id:
+                QMessageBox.warning(self.productlist_pages, "Error", "Please fill all required fields!")
+                return
+            if stock == 0:
+                status = "Out of Stock"
+            elif stock <= 5:
+                status = "Low Stock"
+            else:
+                status = "In Stock"
 
-        if success:
-            QMessageBox.information(self.productlist_pages, "Success", "Product added successfully!")
-            dialog.accept()
-        else:
-            QMessageBox.critical(self.productlist_pages, "Error", "Failed to add product!")
+            sku = self.db.generate_sku()
+            product_id = self.db.generate_product_id()
+            # Save to database
+
+            success = self.db.add_product(product_id,name, sku, category_id, price, stock, warranty,status)
+
+            if success:
+                QMessageBox.information(self.productlist_pages, "Success", "Product added successfully!")
+                dialog.accept()
+            else:
+                QMessageBox.critical(self.productlist_pages, "Error", "Failed to add product!")
+
+        except ValueError as e:
+            QMessageBox.warning(self.productlist_pages, "Error", f"Invalid number format: {str(e)}")
+        except Exception as e:
+            QMessageBox.critical(self.productlist_pages, "Error", f"An error occurred: {str(e)}")
+            print(f"ERROR in save_product: {e}")
+            import traceback
+            traceback.print_exc()
 
     def update_product(self, product_id, dialog):
         """Update existing product in database"""
-        # Get data from dialog
-        name = dialog.addproductName.text() if hasattr(dialog, 'name_input') else ""
-        category_id = dialog.combocategories.currentData() if hasattr(dialog, 'category_combo') else None
-        price = float(dialog.prices.text()) if hasattr(dialog, 'price_input') and dialog.price_input.text() else 0
-        stock = int(dialog.Stockqty.text()) if hasattr(dialog, 'stock_input') and dialog.stock_input.text() else 0
-        warranty = dialog.warraty.text() if hasattr(dialog, 'warranty_input') else ""
+        try:
+            # Get data from dialog - FIXED: Use consistent attribute names
+            name = dialog.addproductName.text() if hasattr(dialog, 'addproductName') else ""
+            category_id = dialog.combocategories.currentData() if hasattr(dialog, 'combocategories') else None
 
-        # Validate
-        if not name or not category_id:
-            QMessageBox.warning(self.productlist_pages, "Error", "Please fill all required fields!")
-            return
+            # Fixed: Check the SAME attributes we're accessing
+            price_text = dialog.prices.text() if hasattr(dialog, 'prices') else ""
+            price = float(price_text) if price_text else 0.0
 
-        # Determine status based on stock
-        status = "In Stock" if stock > 0 else "Out of Stock"
+            stock_text = dialog.Stockqty.text() if hasattr(dialog, 'Stockqty') else ""
+            stock = int(stock_text) if stock_text else 0
 
-        # Update in database
-        success = self.db.update_product(product_id, name, category_id, price, stock, warranty, status)
+            warranty = dialog.warraty.text() if hasattr(dialog, 'warraty') else ""
 
-        if success:
-            QMessageBox.information(self.productlist_pages, "Success", "Product updated successfully!")
-            dialog.accept()
-        else:
-            QMessageBox.critical(self.productlist_pages, "Error", "Failed to update product!")
+            # Validate
+            if not name or not category_id:
+                QMessageBox.warning(self.productlist_pages, "Error", "Please fill all required fields!")
+                return
+
+            if stock == 0:
+                status = "Out of Stock"
+            elif stock <= 5:
+                status = "Low Stock"
+            else:
+                status = "In Stock"
+
+            # Update in database
+            success = self.db.update_product(product_id, name, category_id, price, stock, warranty, status)
+
+            if success:
+                QMessageBox.information(self.productlist_pages, "Success", "Product updated successfully!")
+                dialog.accept()
+            else:
+                QMessageBox.critical(self.productlist_pages, "Error", "Failed to update product!")
+
+        except ValueError as e:
+            QMessageBox.warning(self.productlist_pages, "Error", f"Invalid number format: {str(e)}")
+        except Exception as e:
+            QMessageBox.critical(self.productlist_pages, "Error", f"An error occurred: {str(e)}")
+            print(f"ERROR in update_product: {e}")
+            import traceback
+            traceback.print_exc()
 
     def delete_product(self, product_id):
         """Delete product with confirmation"""
@@ -224,6 +258,5 @@ class ProductController:
                 QMessageBox.critical(self.productlist_pages, "Error", "Failed to delete product!")
 
     def show_context_menu(self, position):
-        """Show right-click context menu on table"""
-        # You can implement context menu for additional actions
+
         pass

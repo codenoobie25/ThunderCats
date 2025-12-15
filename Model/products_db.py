@@ -8,7 +8,7 @@ class ProductsDatabase:
 
     def generate_sku(self):
         random_sku = ''.join(random.choices(string.digits, k=5))
-        return f"SXU{random_sku}"
+        return f"SXU-{random_sku}"
 
     def get_product_by_id(self, product_id):
         if not self.db: return None
@@ -27,7 +27,7 @@ class ProductsDatabase:
                 WHERE product_id=%s
             """
             cursor.execute(query, (name, category_id, price, stock, warranty, status, product_id))
-            self.db.commit()
+            self.db.db.commit()
             return True
         except Exception as e:
             print(f"❌ DB Error: {e}")
@@ -50,16 +50,16 @@ class ProductsDatabase:
                 """
         cursor.execute(query)
         return cursor.fetchall()
-    def add_product(self, name, sku, category_id, price, stock, warranty,status="Active"):
+    def add_product(self,product_id,name, sku, categoryID, price, stock, warranty,status):
         if not self.db: return False
         try:
             cursor = self.db.db.cursor()
             query = """
-                INSERT INTO products (name, sku, categoryID, price, stock_quantity, warranty)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO products (product_id, name, sku, price, status, stock_quantity, categoryID, warranty)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                 """
-            cursor.execute(query, (name, sku, category_id, price, stock, warranty, status))
-            self.db.commit()
+            cursor.execute(query, (product_id, name, sku, price, status, stock, categoryID, warranty))
+            self.db.db.commit()
             return True
         except Exception as e:
             print(f"❌ DB Error: {e}")
@@ -70,7 +70,7 @@ class ProductsDatabase:
             cursor = self.db.db.cursor()
             query = "DELETE FROM products WHERE product_id = %s"  # Fixed 'product_id'
             cursor.execute(query, (product_id,))
-            self.db.commit()
+            self.db.db.commit()
             return True
         except Exception as e:
             print(f"❌ DB Error: {e}")
@@ -80,4 +80,70 @@ class ProductsDatabase:
         query = "select * from products where product_id = %s"
         cursor.execute(query, (product_id,))
         return cursor.fetchone()
+
+    def generate_product_id(self):
+        """Generate a unique 3-digit product ID (100-999)"""
+        cursor = self.db.db.cursor()
+        try:
+            # Get the highest existing product ID
+            cursor.execute("SELECT MAX(CAST(product_id AS UNSIGNED)) FROM products WHERE product_id REGEXP '^[0-9]+$'")
+            result = cursor.fetchone()
+
+            if result and result[0]:
+                last_id = int(result[0])
+                new_id = last_id + 1
+
+                # If we've exceeded 999, start looking for gaps
+                if new_id > 999:
+                    cursor.execute("""
+                                   SELECT product_id
+                                   FROM products
+                                   WHERE product_id REGEXP '^[0-9]+$' 
+                        AND CAST(product_id AS UNSIGNED) BETWEEN 100 AND 999
+                                   ORDER BY CAST (product_id AS UNSIGNED)
+                                   """)
+                    used_ids = {int(row[0]) for row in cursor.fetchall()}
+
+                    # Find first available ID in 100-999 range
+                    for i in range(100, 1000):
+                        if i not in used_ids:
+                            return str(i).zfill(3)
+
+                    # If all IDs are used, raise error
+                    raise Exception("All 3-digit product IDs are in use!")
+            else:
+                # Start with 100 if no products exist
+                new_id = 100
+
+            # Ensure it's 3 digits
+            if new_id < 100:
+                new_id = 100
+            elif new_id > 999:
+                raise Exception("Product ID exceeds 3-digit limit!")
+
+            return str(new_id).zfill(3)
+
+        except Exception as e:
+            print(f"❌ Error generating product ID: {e}")
+            return "100"  # Fallback to default
+        finally:
+            cursor.close()
+
+    def debug_categories(self):
+        """Display all available categories in database"""
+        cursor = self.db.db.cursor()
+        cursor.execute("SELECT categoryID, categoryName FROM category ORDER BY categoryID")
+        categories = cursor.fetchall()
+        cursor.close()
+
+        print("\n=== AVAILABLE CATEGORIES ===")
+        if categories:
+            for cat_id, cat_name in categories:
+                print(f"ID: {cat_id} -> {cat_name}")
+        else:
+            print("No categories found!")
+        print("============================\n")
+
+        return categories
+
 

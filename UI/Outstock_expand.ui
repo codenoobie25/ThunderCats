@@ -506,7 +506,7 @@
       <string notr="true">color:#ffd500</string>
      </property>
      <property name="text">
-      <string>Out of Stock Details</string>
+      <string>Out of Stock and Low Stock</string>
      </property>
     </widget>
    </item>
@@ -533,7 +533,7 @@ QTableWidget::item:hover {
 }</string>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>154</number>
+      <number>207</number>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>
@@ -551,11 +551,6 @@ QTableWidget::item:hover {
      <column>
       <property name="text">
        <string>Status</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Action</string>
       </property>
      </column>
     </widget>

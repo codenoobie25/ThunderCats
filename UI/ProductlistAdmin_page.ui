@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>836</width>
+    <width>941</width>
     <height>511</height>
    </rect>
   </property>
@@ -580,6 +580,35 @@ QPushButton#addProduct:pressed {
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="refresh_btn">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <italic>true</italic>
+          <underline>true</underline>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent;
+border: none;
+color: #ffd500;
+text-align: right;
+padding: 10px;</string>
+        </property>
+        <property name="text">
+         <string>Refresh</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QTableWidget" name="product_table">
         <property name="styleSheet">
          <string notr="true">QTableWidget {
@@ -606,6 +635,9 @@ QTableWidget::item:hover {
         </property>
         <attribute name="horizontalHeaderDefaultSectionSize">
          <number>250</number>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
         </attribute>
         <column>
          <property name="text">

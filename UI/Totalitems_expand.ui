@@ -518,7 +518,7 @@
       <string notr="true">color:#ffd500</string>
      </property>
      <property name="text">
-      <string>Total Product Details</string>
+      <string>Total Product Categories Details</string>
      </property>
     </widget>
    </item>
@@ -800,14 +800,14 @@ QLabel#totalmotherboards {
 }
 
 
-QLabel#Case {
+QLabel#Ram{
     color: #FFD500;            
     font-weight: bold; /* Readable size */
     background-color: transparent;
 }
 
 
-QLabel#totalcase {
+QLabel#totalram {
     color: #FFFFFF;           
     font-size: 12px;           
     font-weight: bold;
@@ -822,7 +822,7 @@ QLabel#totalcase {
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QLabel" name="Case">
+          <widget class="QLabel" name="Ram">
            <property name="text">
             <string>RAM</string>
            </property>
@@ -842,7 +842,7 @@ QLabel#totalcase {
           </spacer>
          </item>
          <item>
-          <widget class="QLabel" name="totalcase">
+          <widget class="QLabel" name="totalram">
            <property name="text">
             <string>0 items</string>
            </property>

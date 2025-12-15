@@ -2,6 +2,7 @@ from PyQt6.QtCore import QTimer, QDateTime, pyqtSignal
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
+from Controllers.dialog_control.TotalproductEX_Controller import TotalproductEXController
 from View.dialog.Transaction_Expand import TransactionDialog
 from View.dialog.TotalItems_Expand import TotalItemDialog
 from View.dialog.TotalRev_expand import TotalRevDialog
@@ -44,6 +45,7 @@ class Adminwindow:
         self.setup_navigation()
         self.setup_clock()
         self.setup_logout()
+        self.update_total_product()
         self.page.stackedWidget.setCurrentIndex(0)
 
 
@@ -65,6 +67,7 @@ class Adminwindow:
                  print(f"DEBUG: Connected {button.objectName()} -> Index {page_index}")
 
         print(f"DEBUG: StackedWidget has {self.page.stackedWidget.count()} total pages")
+
     def setup_logout(self):
         if hasattr(self.page, 'Logoutbtn'):
             self.page.Logoutbtn.clicked.connect(self.confirm_logout)
@@ -125,10 +128,26 @@ class Adminwindow:
         dialog.exec()
 
     def open_total_items_dialog(self):
+        category_counts = self.db.admindb.get_category_counts()
+        print("DEBUG Counts:", category_counts)
+
         dialog = TotalItemDialog()
+
+        self.ex_controller = TotalproductEXController(dialog, category_counts)
         dialog.closeButton.clicked.connect(dialog.close)
         dialog.exec()
 
+    def update_total_product(self):
+        counts = self.db.admindb.get_category_counts()
+
+        # 2. Calculate the Total (Sum of all values)
+        total_items = sum(counts.values())
+        print(f"DEBUG: Total Products Calculated: {total_items}")
+
+        if hasattr(self.page, 'totalProduct'):
+            self.page.totalProduct.setText(str(total_items))
+        else:
+            print("⚠️ Could not find the dashboard label. Check the objectName!")
     def open_transaction_dialog(self):
         dialog = TransactionDialog()
         dialog.closeButton.clicked.connect(dialog.close)
@@ -138,7 +157,6 @@ class Adminwindow:
         dialog = OutStockDialog()
         dialog.closeButton.clicked.connect(dialog.close)
         dialog.exec()
-
 
     def setup_pages(self):
         self.pages = [
@@ -180,29 +198,9 @@ class Adminwindow:
         if hasattr(self.page, 'dateEdit'):
             if current.time().hour() == 0 and current.time().minute() == 0:
                 self.page.dateEdit.setDate(current.date())
-        # Call it in __init__ after setup_navigation():
 
-    #     # Dashboard Pages
-    #     self.page_productlist = ProductListAdmin()
-    #     self.page_salereport = SaleReportAdmin()
-    #     self.page_employee = EmployeeAdmin()
-    #     self.page_access = AccessAdmin()
-    #     self.page_activities = ActivitylogsAdmin()
-    #     self.page_returnapproval = Returnapproval()
-    #
-    #     self.expand_totalrev = TotalRevDialog()
-    #     self.expand_totalitems = TotalItemDialog()
-    #     self.expand_transaction = TransactionDialog()
-    #     self.expand_outstock = OutStockDialog()
-    #
-    #     self.stackedWidget.addWidget(self.page_productlist)
-    #     self.stackedWidget.addWidget(self.page_salereport)
-    #     self.stackedWidget.addWidget(self.page_employee)
-    #     self.stackedWidget.addWidget(self.page_access)
-    #     self.stackedWidget.addWidget(self.page_activities)
-    #     self.stackedWidget.addWidget(self.page_returnapproval)
-    #
-    #
+
+
     #     # four card expand functions
     #     self.totalrevenue_expand.clicked.connect(self.openTotalrev)
     #     self.transaction_expand.clicked.connect(self.openTransaction)
