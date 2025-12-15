@@ -6,7 +6,6 @@ class LoginController:
         self.db = db
         self.main_app = main_app
 
-
         self.username = None
         self.password = None
         self.role = None

@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
+    <width>640</width>
     <height>480</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
   </property>
   <property name="palette">
    <palette>
@@ -484,7 +490,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Downloads/50x50.png</normaloff>../../../Downloads/50x50.png</iconset>
+    <normaloff>../assets/50x50.png</normaloff>../assets/50x50.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

@@ -57,7 +57,7 @@ QSpinBox::up-button:hover, QSpinBox::down-button:hover {
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
-    <widget class="QLabel" name="label1">
+    <widget class="QLabel" name="header">
      <property name="text">
       <string>Add New Product</string>
      </property>

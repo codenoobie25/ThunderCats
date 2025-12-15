@@ -6,4 +6,3 @@ class TransactionDialog(QDialog):
         super().__init__()
         uic.loadUi("UI/Transaction_expand.ui", self)
 
-        self.closeButton.clicked.connect(self.close)

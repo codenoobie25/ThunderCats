@@ -9,5 +9,4 @@ class TotalRevDialog(QDialog):
 
         #self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
-        self.closeButton.clicked.connect(self.close)
 

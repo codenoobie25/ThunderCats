@@ -490,7 +490,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Downloads/50x50.png</normaloff>../../../Downloads/50x50.png</iconset>
+    <normaloff>../assets/50x50.png</normaloff>../assets/50x50.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,0">
    <item>
@@ -798,45 +798,6 @@ QPushButton#Access:pressed {
           <attribute name="buttonGroup">
            <string notr="true">buttonGroup</string>
           </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="Activitylogs">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>45</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton#Activitylogs {
-    background-color: #FFD500;
-    color: #2A004E;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    border: none;
-    padding: 10px 20px;
-}
-
-QPushButton#Activitylogs:hover {
-    background-color: #E6C200; 
-}
-
-QPushButton#Activitylogs:pressed {
-    background-color: #CCAC00; 
-}</string>
-          </property>
-          <property name="text">
-           <string>Activity Logs</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../assets/Activitylogs_icon.svg</normaloff>../assets/Activitylogs_icon.svg</iconset>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
          </widget>
         </item>
         <item>
@@ -1652,6 +1613,9 @@ QPushButton {
                      <iconset>
                       <normaloff>../../../Downloads/expand_content_24dp_FFD500_FILL0_wght400_GRAD0_opsz24.svg</normaloff>../../../Downloads/expand_content_24dp_FFD500_FILL0_wght400_GRAD0_opsz24.svg</iconset>
                     </property>
+                    <property name="shortcut">
+                     <string/>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -1722,6 +1686,9 @@ QPushButton {
                      <iconset>
                       <normaloff>../../../Downloads/expand_content_24dp_FFE066_FILL0_wght400_GRAD0_opsz24.svg</normaloff>../../../Downloads/expand_content_24dp_FFE066_FILL0_wght400_GRAD0_opsz24.svg</iconset>
                     </property>
+                    <property name="shortcut">
+                     <string>Esc</string>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -1791,6 +1758,9 @@ QPushButton {
                      <iconset>
                       <normaloff>../../../Downloads/expand_content_24dp_FFE066_FILL0_wght400_GRAD0_opsz24.svg</normaloff>../../../Downloads/expand_content_24dp_FFE066_FILL0_wght400_GRAD0_opsz24.svg</iconset>
                     </property>
+                    <property name="shortcut">
+                     <string>Esc</string>
+                    </property>
                    </widget>
                   </item>
                   <item>
@@ -1854,6 +1824,9 @@ QPushButton {
                     <property name="icon">
                      <iconset>
                       <normaloff>../../../Downloads/expand_content_24dp_FFD500_FILL0_wght400_GRAD0_opsz24.svg</normaloff>../../../Downloads/expand_content_24dp_FFD500_FILL0_wght400_GRAD0_opsz24.svg</iconset>
+                    </property>
+                    <property name="shortcut">
+                     <string>Esc</string>
                     </property>
                    </widget>
                   </item>

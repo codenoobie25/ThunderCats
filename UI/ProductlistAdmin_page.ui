@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>719</width>
+    <width>836</width>
     <height>511</height>
    </rect>
   </property>
@@ -580,7 +580,7 @@ QPushButton#addProduct:pressed {
        </widget>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="product_table">
         <property name="styleSheet">
          <string notr="true">QTableWidget {
     background-color: #2A004E; 

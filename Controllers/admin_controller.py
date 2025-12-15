@@ -1,7 +1,10 @@
 from PyQt6.QtCore import QTimer, QDateTime, pyqtSignal
-from PyQt6.QtWidgets import QWidget
-from PyQt6.uic import loadUi
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QWidget, QMessageBox
 
+from View.dialog.Transaction_Expand import TransactionDialog
+from View.dialog.TotalItems_Expand import TotalItemDialog
+from View.dialog.TotalRev_expand import TotalRevDialog
 from Controllers.access_controller import AccessController
 from Controllers.activityLogs_controller import ActivityLogsController
 from Controllers.approvalreturn_controller import ApprovalReturnController
@@ -14,7 +17,7 @@ from View.pages.ReturnApproval import Returnapproval
 from View.pages.employee_Admin import EmployeeAdmin
 from View.pages.productlist_admin import ProductListAdmin
 from View.pages.sale_reportAdmin import SaleReport
-
+from View.dialog.OutStockExpand import OutStockDialog
 
 class Adminwindow:
     # logoutSignal = pyqtSignal()
@@ -37,8 +40,10 @@ class Adminwindow:
 
         # self.setup_labels()
         #self.setup_buttons()
+        self.set_up_card_button()
         self.setup_navigation()
         self.setup_clock()
+        self.setup_logout()
         self.page.stackedWidget.setCurrentIndex(0)
 
 
@@ -51,17 +56,89 @@ class Adminwindow:
             self.page.SaleReport: 2,
             self.page.Employee: 3,
             self.page.Access: 4,
-            self.page.Activitylogs:5,
-            self.page.Returnapprovals:6
+            self.page.Returnapprovals:5
         }
         for button,page_index in nav_buttons.items():
             if button:
-
                  button.clicked.connect(lambda checked, index=page_index:
                                        self.page.stackedWidget.setCurrentIndex(index))
                  print(f"DEBUG: Connected {button.objectName()} -> Index {page_index}")
 
         print(f"DEBUG: StackedWidget has {self.page.stackedWidget.count()} total pages")
+    def setup_logout(self):
+        if hasattr(self.page, 'Logoutbtn'):
+            self.page.Logoutbtn.clicked.connect(self.confirm_logout)
+            print("✓ Logout button connected")
+
+    def confirm_logout(self):
+        msg_box = QMessageBox(self.page)
+        msg_box.setWindowTitle("Confirm Logout")
+        msg_box.setText("Are you sure you want to logout?")
+
+        msg_box.setWindowIcon(QIcon("assets/50x50.png"))
+
+        msg_box.setStandardButtons(
+            QMessageBox.StandardButton.Yes |
+            QMessageBox.StandardButton.No
+        )
+        msg_box.setDefaultButton(QMessageBox.StandardButton.No)
+
+        response = msg_box.exec()
+
+        if response == QMessageBox.StandardButton.Yes:
+            self.perform_logout()
+        else:
+            print("User canceled logout")
+
+    def perform_logout(self):
+        print("Logging out...")
+
+        if hasattr(self, 'timer'):
+            self.timer.stop()
+
+        self.page.close()
+
+        self.application.logout()
+    def set_up_card_button(self):
+        print("Setting up card expand buttons...")
+        print("Connecting card expand buttons...")
+
+        # Connect each button directly to its dialog
+        if hasattr(self.page, 'totalrevenue_expand'):
+            self.page.totalrevenue_expand.clicked.connect(self.open_total_revenue_dialog)
+
+        if hasattr(self.page, 'totalitems_expand'):
+            self.page.totalitems_expand.clicked.connect(self.open_total_items_dialog)
+
+        if hasattr(self.page, 'transaction_expand'):
+            self.page.transaction_expand.clicked.connect(self.open_transaction_dialog)
+
+        if hasattr(self.page, 'outstock_expand'):
+            self.page.outstock_expand.clicked.connect(self.open_outstock_dialog)
+
+        print("Card buttons connected successfully")
+
+
+    def open_total_revenue_dialog(self):
+        dialog = TotalRevDialog()
+        dialog.closeButton.clicked.connect(dialog.close)
+        dialog.exec()
+
+    def open_total_items_dialog(self):
+        dialog = TotalItemDialog()
+        dialog.closeButton.clicked.connect(dialog.close)
+        dialog.exec()
+
+    def open_transaction_dialog(self):
+        dialog = TransactionDialog()
+        dialog.closeButton.clicked.connect(dialog.close)
+        dialog.exec()
+
+    def open_outstock_dialog(self):
+        dialog = OutStockDialog()
+        dialog.closeButton.clicked.connect(dialog.close)
+        dialog.exec()
+
 
     def setup_pages(self):
         self.pages = [
@@ -74,18 +151,18 @@ class Adminwindow:
         ]
         for page in self.pages:
             self.page.stackedWidget.addWidget(page)
-        print(f"DEBUG: Added {len(self.pages)} pages. Total pages: {self.page.stackedWidget.count()}")
-        print(f"DEBUG: Index 0 = Dashboard (from UI), Index 1 = {type(self.pages[0]).__name__}")
+        # print(f"DEBUG: Added {len(self.pages)} pages. Total pages: {self.page.stackedWidget.count()}")
+        # print(f"DEBUG: Index 0 = Dashboard (from UI), Index 1 = {type(self.pages[0]).__name__}")
 
     def setup_clock(self):
         current = QDateTime.currentDateTime()
 
         if hasattr(self.page, 'dateEdit'):
                 self.page.dateEdit.setDate(current.date())
-
+                self.page.dateEdit.setDisplayFormat("MMMM d, yyyy")
         if hasattr(self.page, 'timeEdit'):
                 self.page.timeEdit.setTime(current.time())
-
+                self.page.timeEdit.setDisplayFormat("hh:mm:ss Ap")
             # Create timer to update every second
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_clock)
