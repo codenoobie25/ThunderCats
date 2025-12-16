@@ -41,3 +41,23 @@ class AdminDatabase:
             return {}
         finally:
             cursor.close()
+
+    def get_low_stock_products(self):
+
+        cursor = self.db.cursor()
+        try:
+            query = """
+                    SELECT name, stock_quantity
+                    FROM products
+                    WHERE stock_quantity <= 5
+                    ORDER BY stock_quantity ASC \
+                    """
+            cursor.execute(query)
+            results = cursor.fetchall()
+            return results
+
+        except Exception as e:
+            print(f"❌ Error fetching low stock items: {e}")
+            return []
+        finally:
+            cursor.close()

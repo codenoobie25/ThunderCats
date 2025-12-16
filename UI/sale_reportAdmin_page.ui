@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1149</width>
-    <height>550</height>
+    <height>549</height>
    </rect>
   </property>
   <property name="palette">
@@ -535,6 +535,41 @@
           </spacer>
          </item>
          <item>
+          <widget class="QComboBox" name="combo_category">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>45</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox#combo_category{
+    background-color: #3D1459;
+    color: #FFD500;
+    border-radius: 5px;
+    border: 1px solid #520099;
+    padding: 5px;
+    padding-left: 10px;
+}</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Sale</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Product</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>New Item</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
           <widget class="QComboBox" name="combo_period">
            <property name="minimumSize">
             <size>
@@ -544,6 +579,7 @@
            </property>
            <property name="font">
             <font>
+             <family>Segoe UI</family>
              <pointsize>10</pointsize>
             </font>
            </property>
@@ -699,7 +735,7 @@ QLabel#lbl_revenue {
                <string notr="true"/>
               </property>
               <property name="text">
-               <string>Total Hardware Sales</string>
+               <string>Total Sales</string>
               </property>
              </widget>
             </item>
@@ -893,6 +929,13 @@ border-radius: 5px;</string>
               </property>
               <property name="text">
                <string>Revenue by Component</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>barchart here</string>
               </property>
              </widget>
             </item>

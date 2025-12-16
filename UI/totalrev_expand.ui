@@ -744,7 +744,7 @@ font-weight: 600;
 </string>
          </property>
          <property name="text">
-          <string>Net Profit</string>
+          <string>Total Transaction</string>
          </property>
         </widget>
        </item>
@@ -795,7 +795,7 @@ font-weight: 600;
 </string>
          </property>
          <property name="text">
-          <string>Tax Collected</string>
+          <string>Total Items Sold</string>
          </property>
         </widget>
        </item>

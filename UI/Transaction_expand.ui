@@ -506,7 +506,7 @@
       <string notr="true">color: #ffd500</string>
      </property>
      <property name="text">
-      <string>Transaction Details</string>
+      <string>Sales Details</string>
      </property>
     </widget>
    </item>

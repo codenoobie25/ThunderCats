@@ -2,12 +2,17 @@ import pymysql.cursors
 
 from Model.products_db import ProductsDatabase
 from Model.admin_db import AdminDatabase
+from Model.salereport_db import SaleReportDatabase
+
+
+
 class Database:
     def __init__(self):
         self.db = self._create_connection()
 
         self.productdb = ProductsDatabase(self.db)
         self.admindb =  AdminDatabase(self.db)
+        self.salereportdb = SaleReportDatabase(self.db)
     def _create_connection(self):
         db = None
         try:

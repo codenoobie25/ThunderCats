@@ -2,6 +2,7 @@ from PyQt6.QtCore import QTimer, QDateTime, pyqtSignal
 from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QWidget, QMessageBox
 
+from Controllers.dialog_control.OutofStock_LowStockEx_Controller import OutofStockLowStockExCntroller
 from Controllers.dialog_control.TotalproductEX_Controller import TotalproductEXController
 from View.dialog.Transaction_Expand import TransactionDialog
 from View.dialog.TotalItems_Expand import TotalItemDialog
@@ -46,8 +47,8 @@ class Adminwindow:
         self.setup_clock()
         self.setup_logout()
         self.update_total_product()
+        self.update_out_of_stock_total()
         self.page.stackedWidget.setCurrentIndex(0)
-
 
     def setup_navigation(self):
         print(f"DEBUG: Setting up navigation for {len(self.pages)} pages")
@@ -103,10 +104,7 @@ class Adminwindow:
 
         self.application.logout()
     def set_up_card_button(self):
-        print("Setting up card expand buttons...")
-        print("Connecting card expand buttons...")
 
-        # Connect each button directly to its dialog
         if hasattr(self.page, 'totalrevenue_expand'):
             self.page.totalrevenue_expand.clicked.connect(self.open_total_revenue_dialog)
 
@@ -118,8 +116,6 @@ class Adminwindow:
 
         if hasattr(self.page, 'outstock_expand'):
             self.page.outstock_expand.clicked.connect(self.open_outstock_dialog)
-
-        print("Card buttons connected successfully")
 
 
     def open_total_revenue_dialog(self):
@@ -146,15 +142,32 @@ class Adminwindow:
 
         if hasattr(self.page, 'totalProduct'):
             self.page.totalProduct.setText(str(total_items))
+
+
+    def update_out_of_stock_total(self):
+
+        low_stock_list = self.db.admindb.get_low_stock_products()
+
+        total_alerts = len(low_stock_list)
+        print(f"DEBUG: Total Low/Out Stock Items: {total_alerts}")
+
+        if hasattr(self.page, 'Counts'):
+            self.page.Counts.setText(str(total_alerts))
         else:
-            print("⚠️ Could not find the dashboard label. Check the objectName!")
+            print("⚠️ Could not find 'Counts' label on dashboard.")
     def open_transaction_dialog(self):
         dialog = TransactionDialog()
         dialog.closeButton.clicked.connect(dialog.close)
         dialog.exec()
 
     def open_outstock_dialog(self):
+        low_stock_data = self.db.admindb.get_low_stock_products()
+        print(f"DEBUG: Found {len(low_stock_data)} low stock items")
+
         dialog = OutStockDialog()
+
+        self.os_controller = OutofStockLowStockExCntroller(dialog, low_stock_data)
+
         dialog.closeButton.clicked.connect(dialog.close)
         dialog.exec()
 
