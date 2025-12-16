@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1149</width>
+    <width>1197</width>
     <height>549</height>
    </rect>
   </property>
@@ -562,11 +562,6 @@
              <string>Product</string>
             </property>
            </item>
-           <item>
-            <property name="text">
-             <string>New Item</string>
-            </property>
-           </item>
           </widget>
          </item>
          <item>
@@ -625,6 +620,87 @@
              <string>Full Report</string>
             </property>
            </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Plain</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="styleSheet">
+               <string notr="true">color:#ffd500;</string>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="date_start">
+              <property name="maximumSize">
+               <size>
+                <width>111</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background: transparent;
+color:#ffd500;</string>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_3">
+           <property name="frameShape">
+            <enum>QFrame::Shape::NoFrame</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Plain</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_9">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="styleSheet">
+               <string notr="true">color:#ffd500;</string>
+              </property>
+              <property name="text">
+               <string>End</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDateEdit" name="date_end">
+              <property name="styleSheet">
+               <string notr="true">background: transparent;
+color:#ffd500;</string>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::ButtonSymbols::UpDownArrows</enum>
+              </property>
+              <property name="currentSection">
+               <enum>QDateTimeEdit::Section::DaySection</enum>
+              </property>
+              <property name="calendarPopup">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
@@ -929,13 +1005,6 @@ border-radius: 5px;</string>
               </property>
               <property name="text">
                <string>Revenue by Component</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>barchart here</string>
               </property>
              </widget>
             </item>
