@@ -10,8 +10,6 @@ class SaleReportDatabase:
         try:
             cursor = self.db.cursor(pymysql.cursors.DictCursor)
 
-            # This query joins Sales -> Details -> Products -> Categories
-            # It sums up the subtotal for each category automatically.
             query = "SELECT c.categoryName as Category, SUM(sd.subtotal) as Revenue FROM sales s JOIN sale_details sd ON s.sale_id = sd.sale_id JOIN products p ON sd.product_id = p.product_id LEFT JOIN category c ON p.categoryID = c.categoryID WHERE s.sale_date BETWEEN %s AND %s GROUP BY c.categoryName ORDER BY Revenue DESC"
 
             cursor.execute(query, (start_date,end_date))
@@ -25,7 +23,6 @@ class SaleReportDatabase:
 
             if not self.db:
                 return []
-
             try:
                 cursor = self.db.cursor(pymysql.cursors.DictCursor)
                 query = "SELECT p.name as product_name, SUM(sd.quantity) as quantity FROM sales s JOIN sale_details sd ON s.sale_id = sd.sale_id JOIN products p ON sd.product_id = p.product_id WHERE s.sale_date BETWEEN %s AND %s GROUP BY p.name ORDER BY quantity DESC LIMIT 5"
@@ -69,13 +66,14 @@ class SaleReportDatabase:
             return stats
 
     def add_generated_report(self, report_name, file_path, report_type):
-
         if not self.db: return False
         try:
             cursor = self.db.cursor()
             query = "INSERT INTO generated_reports (report_name, file_path, report_type) VALUES (%s, %s, %s)"
             cursor.execute(query, (report_name, file_path, report_type))
+            self.db.commit()
             return True
+
         except Exception as e:
             print(f"❌ Error saving report record: {e}")
             return False

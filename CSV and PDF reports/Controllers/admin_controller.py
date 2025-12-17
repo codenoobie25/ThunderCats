@@ -3,8 +3,6 @@ from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QMessageBox
 import matplotlib
 
-from Model.employee_db import EmployeeDatabase
-
 matplotlib.use('QtAgg')
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 import matplotlib.pyplot as plt
@@ -16,7 +14,6 @@ from Controllers.dialog_control.TotalproductEX_Controller import TotalproductEXC
 from View.dialog.TotalItems_Expand import TotalItemDialog
 from View.dialog.TotalRev_expand import TotalRevDialog
 from Controllers.access_controller import AccessController
-from Controllers.approvalreturn_controller import ApprovalReturnController
 from Controllers.employee_controller import EmployeeController
 from Controllers.product_controller import ProductController
 from Controllers.salereport_controller import SaleReportController
@@ -42,7 +39,6 @@ class Adminwindow:
         self.salereport_Controller = SaleReportController(self.pages[1],self)
         self.employee_Controller = EmployeeController(self.pages[2],self)
         self.access_Controller = AccessController(self.pages[3],self)
-        self.approvalreturn_Controller = ApprovalReturnController(self.pages[4],self)
 
         self.set_up_card_button()
         self.setup_navigation()
@@ -62,8 +58,7 @@ class Adminwindow:
             self.page.Productlist: 1,
             self.page.SaleReport: 2,
             self.page.Employee: 3,
-            self.page.Access: 4,
-            self.page.Returnapprovals:5
+            self.page.Access: 4
         }
         for button,page_index in nav_buttons.items():
             if button:

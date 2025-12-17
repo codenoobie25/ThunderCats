@@ -1,11 +1,12 @@
 import pymysql.cursors
 
 from Model.access_db import AccessDatabase
+from Model.cashier_db import CashierDatabase
 from Model.employee_db import EmployeeDatabase
 from Model.products_db import ProductsDatabase
 from Model.admin_db import AdminDatabase
 from Model.salereport_db import SaleReportDatabase
-
+from Model.sales import SalesDatabase
 
 
 class Database:
@@ -17,6 +18,9 @@ class Database:
         self.salereportdb = SaleReportDatabase(self.db)
         self.employeedb = EmployeeDatabase(self.db)
         self.accessdb = AccessDatabase(self.db)
+        self.cashierdb = CashierDatabase(self.db)
+        self.salesdb = SalesDatabase(self.db)
+        self.admindb = AdminDatabase(self.db)
     def _create_connection(self):
         db = None
         try:
@@ -25,7 +29,7 @@ class Database:
                 user='root',
                 password='',
                 database='thundercatsdb',
-                autocommit=True,
+                autocommit=False,
             )
             print("✅ Database Connected Successfully!")
             return db

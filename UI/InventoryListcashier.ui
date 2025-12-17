@@ -54,7 +54,7 @@
             <string notr="true">color: #ffd500</string>
            </property>
            <property name="text">
-            <string>Inventory List</string>
+            <string>Product List</string>
            </property>
           </widget>
          </item>

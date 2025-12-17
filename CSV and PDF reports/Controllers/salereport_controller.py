@@ -59,24 +59,31 @@ class SaleReportController:
         self.refresh_report()
 
     def get_date_range(self, time_filter):
-        if time_filter == "Custom Range":
+        clean_filter = time_filter.strip()
+        print(f"DEBUG: Selected Filter: '{clean_filter}'")
+
+        if clean_filter == "Custom Range":
             return (self.ui.date_start.date().toString("yyyy-MM-dd 00:00:00"),
                     self.ui.date_end.date().toString("yyyy-MM-dd 23:59:59"))
 
         now = datetime.now()
-        start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+        start = now.replace(hour=0, minute=0, second=0, microsecond=0)
 
-        if time_filter == "This Day":
-            pass
-        elif time_filter == "This Week":
+        if clean_filter == "This Day":
+            pass  # Start is already today
+        elif clean_filter == "This Week":
             start -= timedelta(days=7)
-        elif time_filter == "This Month":
+        elif clean_filter == "This Month":
             start = start.replace(day=1)
-        elif time_filter == "Full Report":
-            start = start.replace(year=2000, month=1, day=1)
+        elif clean_filter == "Full Report":
+            start = datetime(2000, 1, 1, 0, 0, 0)
+            print("DEBUG: Full Report Mode Activated (Start Date: 2000-01-01)")
 
-        return start.strftime('%Y-%m-%d %H:%M:%S'), end.strftime('%Y-%m-%d %H:%M:%S')
+        start_str = start.strftime('%Y-%m-%d %H:%M:%S')
+        end_str = end.strftime('%Y-%m-%d %H:%M:%S')
+
+        return start_str, end_str
 
     def refresh_report(self):
         try:

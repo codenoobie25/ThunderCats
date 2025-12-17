@@ -602,7 +602,7 @@ QTableWidget::item:hover {
       <bool>true</bool>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>150</number>
+      <number>300</number>
      </attribute>
      <attribute name="verticalHeaderVisible">
       <bool>false</bool>

@@ -1,4 +1,3 @@
-import pymysql
 
 class AdminDatabase:
     def __init__(self, db):

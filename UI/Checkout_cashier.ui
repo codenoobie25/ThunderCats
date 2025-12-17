@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Check Out</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../assets/50x50.png</normaloff>../assets/50x50.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QDialog {

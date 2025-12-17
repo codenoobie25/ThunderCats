@@ -26,7 +26,6 @@ class MainApp:
 
     def show_login(self):
         self.login_window = Loginwindow()
-        # Connect Login Controller
         self.login_controller = LoginController(self.login_window, self.db, self)
         self.login_window.show()
 

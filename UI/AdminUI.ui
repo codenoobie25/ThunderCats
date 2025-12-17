@@ -801,45 +801,6 @@ QPushButton#Access:pressed {
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="Returnapprovals">
-          <property name="minimumSize">
-           <size>
-            <width>200</width>
-            <height>45</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QPushButton#Returnapprovals {
-    background-color: #FFD500;
-    color: #2A004E;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    border: none;
-    padding: 10px 20px;
-}
-
-QPushButton#Returnapprovals:hover {
-    background-color: #E6C200; 
-}
-
-QPushButton#Returnapprovals:pressed {
-    background-color: #CCAC00; 
-}
-/*QPushButton:checked{
-	color: #ffe666;
-} */</string>
-          </property>
-          <property name="text">
-           <string>Return Approvals</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../assets/ReturnApprovals_icon.svg</normaloff>../assets/ReturnApprovals_icon.svg</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QPushButton" name="Logoutbtn">
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
@@ -1023,6 +984,11 @@ background: transparent;</string>
                </item>
                <item>
                 <widget class="QTimeEdit" name="timeEdit">
+                 <property name="font">
+                  <font>
+                   <pointsize>-1</pointsize>
+                  </font>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">background-color: #5C00AD;
 color: #ffd500;
@@ -1381,93 +1347,7 @@ background-color: #2F1B4A;</string>
               <property name="frameShadow">
                <enum>QFrame::Shadow::Plain</enum>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_8">
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="font">
-                  <font>
-                   <pointsize>12</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: #ffd500
-;</string>
-                 </property>
-                 <property name="text">
-                  <string>Return Approvals</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QTableWidget" name="Approvaltable">
-                 <property name="styleSheet">
-                  <string notr="true">QTableWidget {
-    background-color: #2A004E; 
-    gridline-color: #5C3278;   
-    color: #E0C2FF;             
-    selection-background-color: #FFD500; 
-    selection-color: #2A004E;           
-}
-
-QHeaderView::section {
-    background-color: #451B63; 
-    color: #FFD500;            
-    border: 1px solid #5C3278;
-    padding: 4px;
-}
-
-QTableWidget::item:hover {
-    background-color: #3A105A; 
-}</string>
-                 </property>
-                 <property name="editTriggers">
-                  <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
-                 </property>
-                 <property name="showGrid">
-                  <bool>false</bool>
-                 </property>
-                 <attribute name="horizontalHeaderVisible">
-                  <bool>true</bool>
-                 </attribute>
-                 <attribute name="horizontalHeaderDefaultSectionSize">
-                  <number>300</number>
-                 </attribute>
-                 <attribute name="verticalHeaderVisible">
-                  <bool>false</bool>
-                 </attribute>
-                 <row>
-                  <property name="text">
-                   <string>New Row</string>
-                  </property>
-                 </row>
-                 <column>
-                  <property name="text">
-                   <string>Receipt Number</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Staff</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Reason</string>
-                  </property>
-                 </column>
-                 <column>
-                  <property name="text">
-                   <string>Status</string>
-                  </property>
-                 </column>
-                 <item row="0" column="0">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </item>
-                </widget>
-               </item>
-              </layout>
+              <layout class="QVBoxLayout" name="verticalLayout_8"/>
              </widget>
             </item>
            </layout>

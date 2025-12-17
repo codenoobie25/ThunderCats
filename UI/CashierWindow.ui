@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1500</width>
-    <height>720</height>
+    <height>721</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -519,7 +519,7 @@
      <property name="frameShadow">
       <enum>QFrame::Shadow::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
       <property name="spacing">
        <number>7</number>
       </property>
@@ -600,47 +600,11 @@ QPushButton#InventoryList:pressed {
 }</string>
         </property>
         <property name="text">
-         <string>Inventory</string>
+         <string>Product List</string>
         </property>
         <property name="icon">
          <iconset>
           <normaloff>../assets/Productlist_icon.svg</normaloff>../assets/Productlist_icon.svg</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="ReturnRequestButton">
-        <property name="minimumSize">
-         <size>
-          <width>119</width>
-          <height>37</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton#ReturnRequestButton {
-    background-color: #FFD500;
-    color: #2A004E;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 11px;
-    border: none;
-    padding: 10px 20px;
-}
-
-QPushButton#ReturnRequestButton:hover {
-    background-color: #E6C200; 
-}
-
-QPushButton#ReturnRequestButton:pressed {
-    background-color: #CCAC00; 
-}</string>
-        </property>
-        <property name="text">
-         <string>Return Request</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../assets/RequestReturn_icon.svg</normaloff>../assets/RequestReturn_icon.svg</iconset>
         </property>
        </widget>
       </item>
@@ -703,7 +667,7 @@ QPushButton#Logout:hover {
    <item>
     <widget class="QFrame" name="frame_2">
      <property name="styleSheet">
-      <string notr="true">background-color:#520099;</string>
+      <string notr="true">background-color:#2A004E;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Shape::StyledPanel</enum>
@@ -714,6 +678,13 @@ QPushButton#Logout:hover {
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QFrame" name="frame">
+        <property name="styleSheet">
+         <string notr="true">QDateEdit, QTimeEdit {
+    font-size: 14px; /* Adjust size as needed */
+    min-height: 30px; /* Make it taller */
+    min-width: 150px; /* Make it wider */
+}</string>
+        </property>
         <property name="frameShape">
          <enum>QFrame::Shape::NoFrame</enum>
         </property>
@@ -748,16 +719,16 @@ QPushButton#Logout:hover {
           </widget>
          </item>
          <item>
-          <widget class="QTimeEdit" name="timeEdit">
+          <widget class="QTimeEdit" name="time">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>40</height>
+             <width>152</width>
+             <height>32</height>
             </size>
            </property>
            <property name="font">
             <font>
-             <pointsize>9</pointsize>
+             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -777,11 +748,11 @@ background: transparent;</string>
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dateEdit">
+          <widget class="QDateEdit" name="date">
            <property name="minimumSize">
             <size>
-             <width>0</width>
-             <height>40</height>
+             <width>152</width>
+             <height>32</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -812,6 +783,41 @@ background: transparent;</string>
             </size>
            </property>
           </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:#ffd500;</string>
+           </property>
+           <property name="text">
+            <string>Filter:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="categoryfilter">
+           <property name="minimumSize">
+            <size>
+             <width>96</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QComboBox#categoryfilter{
+    background-color: #3D1459;
+    color: #FFD500;
+    border-radius: 5px;
+    border: 1px solid #520099;
+    padding: 5px;
+    padding-left: 10px;
+}</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLineEdit" name="SearchItem">
@@ -866,7 +872,7 @@ QLineEdit#SearchItem:focus {
         <widget class="QWidget" name="page_register">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QScrollArea" name="productScrollArea">
+           <widget class="QScrollArea" name="scrollArea_products">
             <property name="minimumSize">
              <size>
               <width>950</width>
@@ -886,7 +892,7 @@ QLineEdit#SearchItem:focus {
                <x>0</x>
                <y>0</y>
                <width>946</width>
-               <height>532</height>
+               <height>533</height>
               </rect>
              </property>
              <layout class="QGridLayout" name="gridLayout"/>
@@ -910,7 +916,7 @@ QLineEdit#SearchItem:focus {
            <widget class="QFrame" name="frame_3">
             <property name="minimumSize">
              <size>
-              <width>357</width>
+              <width>440</width>
               <height>0</height>
              </size>
             </property>
@@ -1006,7 +1012,7 @@ QLineEdit#SearchItem:focus {
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QScrollArea" name="Cartview">
+                 <widget class="QScrollArea" name="scrollArea_cart">
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(69, 0, 128);</string>
                   </property>
@@ -1018,8 +1024,8 @@ QLineEdit#SearchItem:focus {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>331</width>
-                     <height>274</height>
+                     <width>414</width>
+                     <height>275</height>
                     </rect>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_5"/>
