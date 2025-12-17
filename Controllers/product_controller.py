@@ -1,7 +1,7 @@
 from Model.products_db import ProductsDatabase
 from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox, QPushButton, QDialog, QHBoxLayout, QWidget
 from PyQt6.QtCore import Qt
-
+from View.dialog.Addproduct import AddProduct
 
 class ProductController:
     def __init__(self, productlist_pages, adminWindow_controller):
@@ -81,7 +81,6 @@ class ProductController:
         self.categories = self.db.get_all_categories()
 
     def show_add_product_dialog(self):
-        from View.dialog.Addproduct import AddProduct  # Import here to avoid circular imports
 
         dialog = AddProduct()
         dialog.setWindowTitle("Add Product")

@@ -606,34 +606,6 @@ QPushButton#closeButton:hover {
       </property>
      </widget>
     </item>
-    <item>
-     <widget class="QDateTimeEdit" name="dateTimeEdit">
-      <property name="maximumSize">
-       <size>
-        <width>175</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background: transparent;
-border: none;
-color:#ffd500
-</string>
-      </property>
-      <property name="frame">
-       <bool>false</bool>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-      <property name="buttonSymbols">
-       <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QFrame" name="frame_2">
@@ -749,7 +721,7 @@ font-weight: 600;
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="netprofit">
+        <widget class="QLabel" name="totaltransac">
          <property name="styleSheet">
           <string notr="true">color: #F5F3FF;
 font-size: 20px;
@@ -800,7 +772,7 @@ font-weight: 600;
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="taxcollected">
+        <widget class="QLabel" name="totalsold">
          <property name="styleSheet">
           <string notr="true">color: #F5F3FF;
 font-size: 20px;
@@ -887,7 +859,7 @@ font-weight: 600;
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="totalcash">
         <property name="styleSheet">
          <string notr="true">color: #F5F3FF;   /* Off-white */
 font-weight: 600;
@@ -928,7 +900,7 @@ font-weight: 600;
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="totalcard">
         <property name="styleSheet">
          <string notr="true">color: #F5F3FF;   /* Off-white */
 font-weight: 600;
@@ -969,7 +941,7 @@ font-weight: 600;
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="totalEwallet">
         <property name="styleSheet">
          <string notr="true">color: #F5F3FF;   /* Off-white */
 font-weight: 600;

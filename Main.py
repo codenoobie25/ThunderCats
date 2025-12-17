@@ -1,7 +1,9 @@
 import sys
 from PyQt6.QtWidgets import QApplication
 
+from Controllers.cashier_controller import CashierController
 from Model.database import Database
+from View.mainwindow.CashierWindow import Cashierwindow
 from View.mainwindow.loginWindow import Loginwindow
 from View.mainwindow.AdminWindow import AdminWindowUI
 from Controllers.login_controller import LoginController
@@ -15,8 +17,10 @@ class MainApp:
 
         self.login_window = None
         self.admin_window = None
+        self.cashier_window = None
         self.login_controller = None
         self.admin_controller = None
+        self.cashier_controller = None
 
         self.show_login()
 
@@ -35,7 +39,9 @@ class MainApp:
             self.admin_controller = Adminwindow(self.admin_window, self.db, self)
             self.admin_window.show()
         elif role == "Cashier":
-            print("Cashier window coming soon...")
+            self.cashier_window = Cashierwindow()
+            self.cashier_controller = CashierController(self.cashier_window, self.db, self)
+            self.cashier_window.show()
         else:
             print(f"⚠️  Unknown role: {role}")
 

@@ -540,12 +540,17 @@ QTableWidget::item:hover {
      </attribute>
      <column>
       <property name="text">
-       <string>Product ID</string>
+       <string>Transaction ID</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Product Name</string>
+       <string>Sale ID</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Product ID</string>
       </property>
      </column>
      <column>
@@ -555,12 +560,7 @@ QTableWidget::item:hover {
      </column>
      <column>
       <property name="text">
-       <string>Unit Price</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Line Discount</string>
+       <string>Unit price</string>
       </property>
      </column>
      <column>

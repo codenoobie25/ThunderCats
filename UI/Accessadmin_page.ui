@@ -484,7 +484,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="header">
      <property name="font">
       <font>
        <family>Calibri</family>
@@ -574,52 +574,39 @@ QPushButton#Addrole:pressed {
     </widget>
    </item>
    <item>
-    <widget class="QListWidget" name="listWidget">
+    <widget class="QTableWidget" name="listofAccess">
      <property name="styleSheet">
-      <string notr="true">QListWidget {
-    background-color: #150026;   
-    border-radius: 8px;
-    border: 1px solid #3D1459;  
-    color: #FFFFFF;              
-    padding: 5px;
-    outline: none;               
+      <string notr="true">QTableWidget {
+    background-color: #2A004E; 
+    gridline-color: #5C3278;   
+    color: #E0C2FF;             
+    selection-background-color: #FFD500; 
+    selection-color: #2A004E;           
 }
 
-QListWidget::item {
-    padding: 10px;            
-    border-bottom: 1px solid #2A004E; 
+QHeaderView::section {
+    background-color: #451B63; 
+    color: #FFD500;            
+    border: 1px solid #5C3278;
+    padding: 4px;
 }
 
-QListWidget::item:hover {
-    background-color: #250044;   
-}
-
-QListWidget::item:selected {
-    background-color: #3D1459;   
-    color: #FFD500;              
-    border-left: 4px solid #FFD500; 
+QTableWidget::item:hover {
+    background-color: #3A105A; 
 }</string>
      </property>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
+     <property name="editTriggers">
+      <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>150</number>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
     </widget>
    </item>
   </layout>

@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Downloads/50x50.png</normaloff>../../../Downloads/50x50.png</iconset>
+    <normaloff>../assets/50x50.png</normaloff>../assets/50x50.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">
@@ -149,33 +149,7 @@ QComboBox::down-arrow, QDateEdit::down-arrow {
     <widget class="QLineEdit" name="Emailadd"/>
    </item>
    <item row="3" column="1">
-    <widget class="QComboBox" name="Rolebox">
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-    </widget>
+    <widget class="QComboBox" name="Rolebox"/>
    </item>
    <item row="5" column="1">
     <widget class="QDateEdit" name="datejoin"/>
@@ -187,22 +161,17 @@ QComboBox::down-arrow, QDateEdit::down-arrow {
     <widget class="QComboBox" name="empstatus">
      <item>
       <property name="text">
-       <string>New Item</string>
+       <string>Active</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>New Item</string>
+       <string>On Leave</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>New Item</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>New Item</string>
+       <string>Deactivate</string>
       </property>
      </item>
     </widget>

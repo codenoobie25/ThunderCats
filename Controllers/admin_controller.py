@@ -1,20 +1,26 @@
-from PyQt6.QtCore import QTimer, QDateTime, pyqtSignal
+from PyQt6.QtCore import QTimer, QDateTime
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QWidget, QMessageBox
+from PyQt6.QtWidgets import QMessageBox
+import matplotlib
+
+from Model.employee_db import EmployeeDatabase
+
+matplotlib.use('QtAgg')
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+import matplotlib.pyplot as plt
+from PyQt6.QtWidgets import QVBoxLayout
 
 from Controllers.dialog_control.OutofStock_LowStockEx_Controller import OutofStockLowStockExCntroller
+from Controllers.dialog_control.TotalRevenueEX_Controller import TotalRevenueEXController
 from Controllers.dialog_control.TotalproductEX_Controller import TotalproductEXController
-from View.dialog.Transaction_Expand import TransactionDialog
 from View.dialog.TotalItems_Expand import TotalItemDialog
 from View.dialog.TotalRev_expand import TotalRevDialog
 from Controllers.access_controller import AccessController
-from Controllers.activityLogs_controller import ActivityLogsController
 from Controllers.approvalreturn_controller import ApprovalReturnController
 from Controllers.employee_controller import EmployeeController
 from Controllers.product_controller import ProductController
 from Controllers.salereport_controller import SaleReportController
 from View.pages.AccessAdmin import AccessAdmin
-from View.pages.ActivityLogsAdmin import ActivitylogsAdmin
 from View.pages.ReturnApproval import Returnapproval
 from View.pages.employee_Admin import EmployeeAdmin
 from View.pages.productlist_admin import ProductListAdmin
@@ -22,13 +28,12 @@ from View.pages.sale_reportAdmin import SaleReport
 from View.dialog.OutStockExpand import OutStockDialog
 
 class Adminwindow:
-    # logoutSignal = pyqtSignal()
     def __init__(self, adminwindow, db, application):
         self.page = adminwindow
         self.db = db
         self.application = application
-        # self.userID = userID
-        # self.usertypr = usertypr
+
+        #self.employee_db = EmployeeDatabase(self.db)
 
         self.pages = None
         self.setup_pages()
@@ -37,17 +42,16 @@ class Adminwindow:
         self.salereport_Controller = SaleReportController(self.pages[1],self)
         self.employee_Controller = EmployeeController(self.pages[2],self)
         self.access_Controller = AccessController(self.pages[3],self)
-        self.activitylogs_Controller = ActivityLogsController(self.pages[4],self)
-        self.approvalreturn_Controller = ApprovalReturnController(self.pages[5],self)
+        self.approvalreturn_Controller = ApprovalReturnController(self.pages[4],self)
 
-        # self.setup_labels()
-        #self.setup_buttons()
         self.set_up_card_button()
         self.setup_navigation()
         self.setup_clock()
         self.setup_logout()
         self.update_total_product()
         self.update_out_of_stock_total()
+        self.update_revenue_dashboard()
+        self.setup_weekly_sales_chart()
         self.page.stackedWidget.setCurrentIndex(0)
 
     def setup_navigation(self):
@@ -111,15 +115,18 @@ class Adminwindow:
         if hasattr(self.page, 'totalitems_expand'):
             self.page.totalitems_expand.clicked.connect(self.open_total_items_dialog)
 
-        if hasattr(self.page, 'transaction_expand'):
-            self.page.transaction_expand.clicked.connect(self.open_transaction_dialog)
-
         if hasattr(self.page, 'outstock_expand'):
             self.page.outstock_expand.clicked.connect(self.open_outstock_dialog)
 
 
     def open_total_revenue_dialog(self):
+        revenue_data = self.db.admindb.get_revenue_details()
+        print("DEBUG Revenue Data:", revenue_data)
+
         dialog = TotalRevDialog()
+
+        self.rev_controller = TotalRevenueEXController(dialog, revenue_data)
+
         dialog.closeButton.clicked.connect(dialog.close)
         dialog.exec()
 
@@ -155,10 +162,6 @@ class Adminwindow:
             self.page.Counts.setText(str(total_alerts))
         else:
             print("⚠️ Could not find 'Counts' label on dashboard.")
-    def open_transaction_dialog(self):
-        dialog = TransactionDialog()
-        dialog.closeButton.clicked.connect(dialog.close)
-        dialog.exec()
 
     def open_outstock_dialog(self):
         low_stock_data = self.db.admindb.get_low_stock_products()
@@ -177,7 +180,6 @@ class Adminwindow:
             SaleReport(),
             EmployeeAdmin(),
             AccessAdmin(),
-            ActivitylogsAdmin(),
             Returnapproval()
         ]
         for page in self.pages:
@@ -212,70 +214,65 @@ class Adminwindow:
             if current.time().hour() == 0 and current.time().minute() == 0:
                 self.page.dateEdit.setDate(current.date())
 
+    def update_revenue_dashboard(self):
 
+        data = self.db.admindb.get_revenue_details()
 
-    #     # four card expand functions
-    #     self.totalrevenue_expand.clicked.connect(self.openTotalrev)
-    #     self.transaction_expand.clicked.connect(self.openTransaction)
-    #     self.totalitems_expand.clicked.connect(self.openTotalitems)
-    #     self.outstock_expand.clicked.connect(self.openOutstock)
-    #
-    #     self.setup_navigation()
-    #
-    #     # 2. Timer/Clock Setup
-    #     self.timer = QTimer(self)
-    #     self.timer.timeout.connect(self.update_clock)
-    #     self.timer.start(1000)
-    #     self.update_clock()
-    #
-    #     # 3. Connect Logout
-    #     self.Logoutbtn.clicked.connect(self.admin_logout)
-    #
-    # def setup_navigation(self):
-    #
-    #     self.Dashboard2.clicked.connect(lambda: self.switch_to_dashboard())
-    #     self.Productlist.clicked.connect(lambda: self.switch_to_product_page())
-    #     self.SaleReport.clicked.connect(lambda: self.switch_to_sale_report())
-    #     self.Employee.clicked.connect(lambda: self.switch_to_employee())
-    #     self.Access.clicked.connect(lambda: self.switch_to_access())
-    #     self.Activitylogs.clicked.connect(lambda: self.switch_to_activities())
-    #     self.Returnapprovals.clicked.connect(lambda: self.switch_to_returnapproval())
-    #
-    # def openTotalrev(self):
-    #     expand_totalrev = TotalRevDialog()
-    #     expand_totalrev.exec()
-    # def openTotalitems(self):
-    #     expand_totalitems = TotalItemDialog()
-    #     expand_totalitems.exec()
-    # def openTransaction(self):
-    #     expand_transaction = TransactionDialog()
-    #     expand_transaction.exec()
-    # def openOutstock(self):
-    #     expand_outstock = OutStockDialog()
-    #     expand_outstock.exec()
-    #
-    # def switch_to_dashboard(self):
-    #     #print("Switching to Dashboard (Index 0)")
-    #     self.stackedWidget.setCurrentIndex(0)
-    # def switch_to_product_page(self):
-    #     self.stackedWidget.setCurrentWidget(self.page_productlist)
-    # def switch_to_sale_report(self):
-    #     self.stackedWidget.setCurrentWidget(self.page_salereport)
-    # def switch_to_employee(self):
-    #     self.stackedWidget.setCurrentWidget(self.page_employee)
-    # def switch_to_access(self):
-    #     self.stackedWidget.setCurrentWidget(self.page_access)
-    # def switch_to_activities(self):
-    #     self.stackedWidget.setCurrentWidget(self.page_activities)
-    # def switch_to_returnapproval(self):
-    #     self.stackedWidget.setCurrentWidget(self.page_returnapproval)
-    # def update_clock(self):
-    #     now = QDateTime.currentDateTime()
-    #     if hasattr(self, 'dateEdit'):
-    #         self.dateEdit.setDate(now.date())
-    #     if hasattr(self, 'timeEdit'):
-    #         self.timeEdit.setTime(now.time())
-    #
-    # def admin_logout(self):
-    #     self.logoutSignal.emit()
-    #     self.close()
+        gross_sale = data.get('gross_sale', 0.00)
+
+        formatted_revenue = "{:,.2f}".format(gross_sale)
+        print(f"DEBUG: Total Revenue for Dashboard: {formatted_revenue}")
+
+        if hasattr(self.page, 'totalRev'):
+            self.page.totalRev.setText(formatted_revenue)
+
+    def setup_weekly_sales_chart(self):
+        raw_data = self.db.admindb.get_weekly_sales_data()
+
+        days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        sales_map = {day: 0.0 for day in days_order}
+
+        if raw_data:
+            for row in raw_data:
+                day_name = row[0]
+                total = float(row[1])
+                if day_name in sales_map:
+                    sales_map[day_name] = total
+
+        x_days = days_order
+        y_amounts = [sales_map[day] for day in days_order]
+
+        fig, ax = plt.subplots(figsize=(5, 3))  # Size doesn't matter much, layout handles it
+
+        fig.patch.set_facecolor('none')
+        ax.set_facecolor('none')
+
+        ax.plot(x_days, y_amounts, marker='o', color='#FFD700', linewidth=2)
+
+        ax.tick_params(axis='x', colors='white')
+        ax.tick_params(axis='y', colors='white')
+        ax.spines['bottom'].set_color('white')
+        ax.spines['left'].set_color('white')
+        ax.spines['top'].set_color('none')
+        ax.spines['right'].set_color('none')
+
+        # Add labels (Optional)
+        ax.set_ylabel('Sales', color='white')
+
+        target_widget = self.page.WeeklyRevChart
+
+        if target_widget.layout() is None:
+            layout = QVBoxLayout(target_widget)
+            target_widget.setLayout(layout)
+        else:
+            layout = target_widget.layout()
+            while layout.count():
+                item = layout.takeAt(0)
+                widget = item.widget()
+                if widget:
+                    widget.deleteLater()
+
+        canvas = FigureCanvasQTAgg(fig)
+        layout.addWidget(canvas)
+
+        print("✅ Weekly Sales Chart Updated")

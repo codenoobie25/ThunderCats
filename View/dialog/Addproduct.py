@@ -7,4 +7,3 @@ class AddProduct(QDialog):
         super().__init__()
         loadUi("UI/Add_product.ui", self)
 
-        #elf.setWindowFlags(Qt.WindowType.Dialog | Qt.WindowType.FramelessWindowHint)

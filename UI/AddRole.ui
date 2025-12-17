@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>346</width>
-    <height>225</height>
+    <height>228</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -495,7 +495,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Downloads/50x50.png</normaloff>../../../Downloads/50x50.png</iconset>
+    <normaloff>../assets/50x50.png</normaloff>../assets/50x50.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">
@@ -593,7 +593,7 @@ QPushButton#Cancelbutton:hover {
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="rolename">
+       <widget class="QLineEdit" name="username">
         <property name="font">
          <font>
           <pointsize>-1</pointsize>
@@ -606,7 +606,7 @@ color:#000000;</string>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="password">
         <property name="styleSheet">
          <string notr="true">background-color:#ffffff;
 color:#000000;</string>
@@ -614,7 +614,7 @@ color:#000000;</string>
        </widget>
       </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="users">
         <property name="styleSheet">
          <string notr="true">color:#ffd500</string>
         </property>
@@ -624,7 +624,7 @@ color:#000000;</string>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QComboBox" name="userID">
         <property name="minimumSize">
          <size>
           <width>0</width>

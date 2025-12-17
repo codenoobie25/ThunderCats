@@ -5,5 +5,3 @@ class addemployeeDialog(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("UI/AddEmployee.ui", self)
-
-        self.cancelButton.clicked.connect(self.close)

@@ -620,6 +620,11 @@
              <string>Full Report</string>
             </property>
            </item>
+           <item>
+            <property name="text">
+             <string>Custom Range</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item>
@@ -657,7 +662,7 @@ color:#ffd500;</string>
                <bool>true</bool>
               </property>
               <property name="calendarPopup">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -696,7 +701,7 @@ color:#ffd500;</string>
                <enum>QDateTimeEdit::Section::DaySection</enum>
               </property>
               <property name="calendarPopup">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -707,7 +712,7 @@ color:#ffd500;</string>
           <widget class="QPushButton" name="btn_export">
            <property name="minimumSize">
             <size>
-             <width>85</width>
+             <width>95</width>
              <height>50</height>
             </size>
            </property>
@@ -1036,18 +1041,15 @@ border-radius: 5px;</string>
             <string notr="true">color:#FFD500;</string>
            </property>
            <property name="text">
-            <string>Generated Sales Reports</string>
+            <string>Generated Reports</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="listWidget_reports">
-           <property name="styleSheet">
-            <string notr="true">color: #FFE666;</string>
-           </property>
-           <property name="editTriggers">
-            <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
-           </property>
+          <widget class="QTableWidget" name="table_reports">
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
           </widget>
          </item>
         </layout>

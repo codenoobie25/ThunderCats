@@ -711,7 +711,7 @@ QLabel#numberofdeactivatedEmployee {
                </font>
               </property>
               <property name="text">
-               <string>Deactivated Employee</string>
+               <string>Deactivated and On Leave Employee</string>
               </property>
              </widget>
             </item>
@@ -853,6 +853,9 @@ QHeaderView::section {
 QTableWidget::item:hover {
     background-color: #3A105A; 
 }</string>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
         </property>
         <attribute name="horizontalHeaderVisible">
          <bool>true</bool>

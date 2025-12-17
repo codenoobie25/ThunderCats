@@ -1,5 +1,7 @@
 import pymysql.cursors
 
+from Model.access_db import AccessDatabase
+from Model.employee_db import EmployeeDatabase
 from Model.products_db import ProductsDatabase
 from Model.admin_db import AdminDatabase
 from Model.salereport_db import SaleReportDatabase
@@ -13,6 +15,8 @@ class Database:
         self.productdb = ProductsDatabase(self.db)
         self.admindb =  AdminDatabase(self.db)
         self.salereportdb = SaleReportDatabase(self.db)
+        self.employeedb = EmployeeDatabase(self.db)
+        self.accessdb = AccessDatabase(self.db)
     def _create_connection(self):
         db = None
         try:
@@ -32,7 +36,7 @@ class Database:
     def validate_login(self, username, password):
         cursor = self.db.cursor()
         cursor.execute(
-            'SELECT Username, Passwords FROM users WHERE Username = %s AND Passwords = %s',
+            'SELECT username, password FROM users WHERE username = %s AND password = %s',
             (username, password,)
         )
         result = cursor.fetchone()
@@ -41,10 +45,14 @@ class Database:
     def get_user_type(self, Username):
         cursor = self.db.cursor()
         cursor.execute(
-            'SELECT Role FROM users WHERE Username = %s',
+            '''
+            SELECT r.role_name
+            FROM users u
+                     JOIN employee_roles r ON u.roleID = r.roleID
+            WHERE u.username = %s
+            ''',
             (Username,)
         )
         result = cursor.fetchone()
-        print(result)
         cursor.close()
         return result
