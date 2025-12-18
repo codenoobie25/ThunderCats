@@ -1,5 +1,4 @@
 import pymysql.cursors
-
 from Model.access_db import AccessDatabase
 from Model.cashier_db import CashierDatabase
 from Model.employee_db import EmployeeDatabase
@@ -46,6 +45,7 @@ class Database:
         result = cursor.fetchone()
         cursor.close()
         return result is not None
+
     def get_user_type(self, Username):
         cursor = self.db.cursor()
         cursor.execute(

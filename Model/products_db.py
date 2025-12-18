@@ -50,6 +50,7 @@ class ProductsDatabase:
                 """
         cursor.execute(query)
         return cursor.fetchall()
+
     def add_product(self,product_id,name, sku, categoryID, price, stock, warranty,status):
         if not self.db: return False
         try:
@@ -64,6 +65,7 @@ class ProductsDatabase:
         except Exception as e:
             print(f"❌ DB Error: {e}")
             return False
+
     def delete_product(self, product_id):
         if not self.db: return False
         try:
@@ -75,6 +77,7 @@ class ProductsDatabase:
         except Exception as e:
             print(f"❌ DB Error: {e}")
             return False
+
     def get_product_by_id(self,product_id):
         cursor = self.db.db.cursor()
         query = "select * from products where product_id = %s"
@@ -128,7 +131,6 @@ class ProductsDatabase:
             return "100"  # Fallback to default
         finally:
             cursor.close()
-
 
     def fetch_inventory_list_data(self):
         if not self.db: return []

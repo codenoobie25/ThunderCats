@@ -1203,35 +1203,6 @@ QLineEdit#SearchItem:focus {
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_5">
                    <item>
-                    <widget class="QPushButton" name="cancelButton">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>35</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton#cancelButton {
-    background-color: transparent;
-    color: #FFFFFF;
-    border: 2px solid #520099; /* Your secondary color as the border */
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px 20px;
-}
-
-QPushButton#cancelButton:hover {
-    background-color: #520099; /* Fills in with purple on hover */
-    color: #FFFFFF;
-}</string>
-                     </property>
-                     <property name="text">
-                      <string>Cancel</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
                     <widget class="QPushButton" name="checkoutButton">
                      <property name="minimumSize">
                       <size>

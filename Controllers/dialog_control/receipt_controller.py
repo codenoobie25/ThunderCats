@@ -14,7 +14,7 @@ class ReceiptC_C_C:
     def populate_receipt(self):
         data = self.transaction_data
 
-        self.ui.Receiptnumber.setText(data['receipt_number'])
+        self.ui.Receiptnumber.setText(f"Receipt #: {data['receipt_number']}")
 
         self.ui.subtotal.setText(f"{data['subtotal']:.2f}")
         self.ui.taxs.setText(f"{data['tax_amount']:.2f}")
@@ -24,7 +24,7 @@ class ReceiptC_C_C:
         current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.ui.datentime.setText(current_date)
 
-        self.ui.transactionID.setText(str(data['sale_id']))
+        self.ui.transactionID.setText("Transaction ID: " + str(data['sale_id']))
 
         self.populate_items_scroll_area(data['items'])
 

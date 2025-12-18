@@ -611,6 +611,9 @@ color:#000000;</string>
          <string notr="true">background-color:#ffffff;
 color:#000000;</string>
         </property>
+        <property name="echoMode">
+         <enum>QLineEdit::EchoMode::Password</enum>
+        </property>
        </widget>
       </item>
       <item row="0" column="0">

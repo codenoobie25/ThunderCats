@@ -126,7 +126,6 @@ class SaleReportController:
             self.canvas.draw()
             return
 
-
         df = pd.DataFrame(data)
 
         if metric_name == "Revenue":
@@ -228,8 +227,7 @@ class SaleReportController:
 
                     total_sum += val
                 else:
-                    # row: [name, cat, qty, subtotal]
-                    # Ensure we grab the right index for money (index 3)
+
                     val = float(row_list[3])
                     row_list[3] = f"P{val:,.2f}"
                     total_sum += val
