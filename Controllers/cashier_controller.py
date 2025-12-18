@@ -1,10 +1,12 @@
 from PyQt6.QtCore import QDateTime, QTimer, Qt
+from PyQt6.QtGui import QColor
 from PyQt6.QtWidgets import (
-    QMessageBox, QWidget, QGridLayout, QVBoxLayout,
+    QMessageBox, QWidget, QGridLayout, QVBoxLayout, QHeaderView, QTableWidgetItem,
 )
 from Controllers.dialog_control.checkout_controller import CheckoutCashierController
 from View.dialog.chechoutWidget import ProductCardWidget, CartItemWidget
 from View.dialog.checkout_cashierUI import CheckoutCashier
+from View.pages.InventoryList import inventorylistcashier
 
 class CashierController:
 
@@ -19,6 +21,8 @@ class CashierController:
         self.all_categories = []  # Store categories
         self.tax_rate = 0.08
 
+        self.setup_pages()
+        self.setup_navigation()
         self.setup_clock()
         self.setup_logout()
         self.init_ui_areas()
@@ -36,6 +40,125 @@ class CashierController:
         if hasattr(self.page, 'checkoutButton'):  # Use your actual button name
             self.page.checkoutButton.clicked.connect(self.open_checkout_dialog)
 
+        # print("\n=== DEBUG: LISTING ALL WIDGETS ===")
+        # print("Stacked Widget Name:",
+        #       self.page.findChild(QWidget, "main_body_contents") or "NOT FOUND (main_body_contents)")
+        # print("Stacked Widget Name (Alt):",
+        #       self.page.findChild(QWidget, "stackedWidget") or "NOT FOUND (stackedWidget)")
+        #
+        # print("--- BUTTONS FOUND ---")
+        # for widget in self.page.findChildren(QWidget):
+        #     name = widget.objectName()
+        #     # Print if it looks like a button
+        #     if "btn" in name.lower() or "button" in name.lower() or "list" in name.lower():
+        #         print(f"Found Widget: {name}")
+        # print("==================================\n")
+    def setup_pages(self):
+        self.inventory_page = inventorylistcashier()
+
+        if hasattr(self.page, 'stackedWidget'):
+            self.page.stackedWidget.addWidget(self.inventory_page)
+
+    def setup_navigation(self):
+        """Connect Sidebar Buttons using REAL NAMES from your Debug"""
+        print("DEBUG: Connecting Navigation Buttons...")
+
+        # --- BUTTON 1: REGISTER (Go to Index 0) ---
+        # Based on your screenshot, the button is named 'Register'
+        if hasattr(self.page, 'Register'):
+            self.page.Register.clicked.connect(lambda: self.switch_page(0))
+            print("✅ Connected 'Register' button")
+        else:
+            print("❌ Warning: 'Register' button not found")
+
+        # --- BUTTON 2: PRODUCT LIST (Go to Index 1) ---
+        # Based on your debug, the button is named 'ProductList'
+        if hasattr(self.page, 'ProductList'):
+            self.page.ProductList.clicked.connect(lambda: self.switch_page(1))
+            print("✅ Connected 'ProductList' button")
+        else:
+            print("❌ Warning: 'ProductList' button not found")
+
+    def switch_page(self, index):
+        """Switch the stacked widget page"""
+        if hasattr(self.page, 'stackedWidget'):
+            print(f"DEBUG: Switching to page index {index}")
+            self.page.stackedWidget.setCurrentIndex(index)
+
+            # If switching to Inventory (Index 1), refresh the data!
+            if index == 1:
+                self.load_inventory_table()
+        else:
+            print("❌ Error: Cannot switch page, 'stackedWidget' missing.")
+
+    def switch_page(self, index):
+
+        if hasattr(self.page, 'stackedWidget'):
+            self.page.stackedWidget.setCurrentIndex(index)
+
+            if index == 1:
+                self.load_inventory_table()
+
+    def load_inventory_table(self):
+        print("DEBUG: Loading Cashier Inventory Table...")
+
+        if not hasattr(self.inventory_page, 'tableWidget'):
+            print("ERROR: tableWidget not found in inventory page")
+            return
+
+        table = self.inventory_page.tableWidget
+        table.setRowCount(0)
+
+        products = self.db.productdb.get_all_products()
+
+        # Define Columns if needed (Name, SKU, Category, Price, Stock, Warranty, Status)
+        # Mapping DB result index to Table Column index:
+        # DB: 1=Name, 2=SKU, 3=Category, 4=Price, 5=Stock, 6=Status, 7=Warranty
+
+        for row_idx, product in enumerate(products):
+            table.insertRow(row_idx)
+
+            # 1. Product Name
+            table.setItem(row_idx, 0, QTableWidgetItem(str(product[1])))
+
+            # 2. SKU
+            table.setItem(row_idx, 1, QTableWidgetItem(str(product[2])))
+
+            # 3. Category
+            table.setItem(row_idx, 2, QTableWidgetItem(str(product[3])))
+
+            # 4. Price
+            price_item = QTableWidgetItem(f"₱ {float(product[4]):,.2f}")
+            price_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            table.setItem(row_idx, 3, price_item)
+
+            # 5. Stock
+            stock_val = int(product[5])
+            stock_item = QTableWidgetItem(str(stock_val))
+            stock_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            table.setItem(row_idx, 4, stock_item)
+
+            # 6. Warranty
+            table.setItem(row_idx, 5, QTableWidgetItem(str(product[7])))
+
+            # 7. Status
+            status_text = "In Stock"
+            text_color = QColor("#00C853")  # Green
+
+            if stock_val <= 0:
+                status_text = "Out of Stock"
+                text_color = QColor("#FF0000")  # Red
+            elif stock_val <= 5:
+                status_text = "Low Stock"
+                text_color = QColor("#FF8C00")  # Orange
+
+            status_item = QTableWidgetItem(status_text)
+            status_item.setForeground(text_color)
+            status_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            table.setItem(row_idx, 6, status_item)
+
+        header = table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
     def init_ui_areas(self):
         """Initialize the product grid and cart scroll areas"""
         if hasattr(self.page, 'scrollArea_products'):

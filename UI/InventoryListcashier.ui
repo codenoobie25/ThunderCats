@@ -96,11 +96,6 @@ QTableWidget::item:hover {
         </column>
         <column>
          <property name="text">
-          <string>SKU</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
           <string>Category</string>
          </property>
         </column>
@@ -112,6 +107,11 @@ QTableWidget::item:hover {
         <column>
          <property name="text">
           <string>Stock</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Warranty</string>
          </property>
         </column>
         <column>

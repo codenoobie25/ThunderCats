@@ -529,7 +529,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../../../Downloads/100x100.png</pixmap>
+         <pixmap>../assets/100x100.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -573,7 +573,7 @@ QPushButton#Register:pressed {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="InventoryList">
+       <widget class="QPushButton" name="ProductList">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -581,7 +581,7 @@ QPushButton#Register:pressed {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton#InventoryList {
+         <string notr="true">QPushButton#ProductList {
     background-color: #FFD500;
     color: #2A004E;
     border-radius: 8px;
@@ -591,11 +591,11 @@ QPushButton#Register:pressed {
     padding: 10px 20px;
 }
 
-QPushButton#InventoryList:hover {
+QPushButton#ProductList:hover {
     background-color: #E6C200; 
 }
 
-QPushButton#InventoryList:pressed {
+QPushButton#ProductList:pressed {
     background-color: #CCAC00; 
 }</string>
         </property>

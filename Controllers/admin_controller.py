@@ -30,8 +30,6 @@ class Adminwindow:
         self.db = db
         self.application = application
 
-        #self.employee_db = EmployeeDatabase(self.db)
-
         self.pages = None
         self.setup_pages()
 

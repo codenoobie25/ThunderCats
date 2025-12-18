@@ -31,9 +31,8 @@ class ProductController:
         table.setRowCount(0)
 
         # Set column count
-        table.setColumnCount(8)  # product_id, name, sku, category, price, stock, status, warranty
+        table.setColumnCount(8)
 
-        # Set headers
         headers = ["ID", "Name", "SKU", "Category", "Price", "Stock", "Status", "Warranty", "Actions"]
         table.setColumnCount(len(headers))
         table.setHorizontalHeaderLabels(headers)

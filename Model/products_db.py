@@ -146,4 +146,23 @@ class ProductsDatabase:
 
         return categories
 
+    def fetch_inventory_list_data(self):
+        if not self.db: return []
+        try:
+            cursor = self.db.cursor()
+            query = """
+                    SELECT p.name, \
+                           c.categoryName, \
+                           p.price, \
+                           p.stock_quantity, \
+                           p.warranty
+                    FROM products p
+                             LEFT JOIN category c ON p.categoryID = c.categoryID
+                    ORDER BY p.name ASC \
+                    """
+            cursor.execute(query)
+            return cursor.fetchall()
+        except Exception as e:
+            print(f"Error fetching inventory list data: {e}")
+            return []
 
