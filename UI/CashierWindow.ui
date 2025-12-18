@@ -511,10 +511,11 @@
       <string notr="true">QFrame#sidebarContainer {
     background-color: #1A0033; 
     border-right: 1px solid #3D1459; 
-}</string>
+}
+</string>
      </property>
      <property name="frameShape">
-      <enum>QFrame::Shape::StyledPanel</enum>
+      <enum>QFrame::Shape::NoFrame</enum>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Shadow::Raised</enum>

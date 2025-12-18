@@ -33,26 +33,12 @@ class CashierController:
         self.setup_category_filter()
         self.display_products()
 
-        # Connect search
         if hasattr(self.page, 'SearchItem'):
             self.page.SearchItem.textChanged.connect(self.display_products)
 
         if hasattr(self.page, 'checkoutButton'):  # Use your actual button name
             self.page.checkoutButton.clicked.connect(self.open_checkout_dialog)
 
-        # print("\n=== DEBUG: LISTING ALL WIDGETS ===")
-        # print("Stacked Widget Name:",
-        #       self.page.findChild(QWidget, "main_body_contents") or "NOT FOUND (main_body_contents)")
-        # print("Stacked Widget Name (Alt):",
-        #       self.page.findChild(QWidget, "stackedWidget") or "NOT FOUND (stackedWidget)")
-        #
-        # print("--- BUTTONS FOUND ---")
-        # for widget in self.page.findChildren(QWidget):
-        #     name = widget.objectName()
-        #     # Print if it looks like a button
-        #     if "btn" in name.lower() or "button" in name.lower() or "list" in name.lower():
-        #         print(f"Found Widget: {name}")
-        # print("==================================\n")
     def setup_pages(self):
         self.inventory_page = inventorylistcashier()
 
@@ -60,36 +46,20 @@ class CashierController:
             self.page.stackedWidget.addWidget(self.inventory_page)
 
     def setup_navigation(self):
-        """Connect Sidebar Buttons using REAL NAMES from your Debug"""
-        print("DEBUG: Connecting Navigation Buttons...")
 
-        # --- BUTTON 1: REGISTER (Go to Index 0) ---
-        # Based on your screenshot, the button is named 'Register'
         if hasattr(self.page, 'Register'):
             self.page.Register.clicked.connect(lambda: self.switch_page(0))
-            print("✅ Connected 'Register' button")
-        else:
-            print("❌ Warning: 'Register' button not found")
 
-        # --- BUTTON 2: PRODUCT LIST (Go to Index 1) ---
-        # Based on your debug, the button is named 'ProductList'
         if hasattr(self.page, 'ProductList'):
             self.page.ProductList.clicked.connect(lambda: self.switch_page(1))
-            print("✅ Connected 'ProductList' button")
-        else:
-            print("❌ Warning: 'ProductList' button not found")
 
     def switch_page(self, index):
-        """Switch the stacked widget page"""
         if hasattr(self.page, 'stackedWidget'):
             print(f"DEBUG: Switching to page index {index}")
             self.page.stackedWidget.setCurrentIndex(index)
 
-            # If switching to Inventory (Index 1), refresh the data!
             if index == 1:
                 self.load_inventory_table()
-        else:
-            print("❌ Error: Cannot switch page, 'stackedWidget' missing.")
 
     def switch_page(self, index):
 
@@ -109,37 +79,33 @@ class CashierController:
         table = self.inventory_page.tableWidget
         table.setRowCount(0)
 
-        products = self.db.productdb.get_all_products()
-
-        # Define Columns if needed (Name, SKU, Category, Price, Stock, Warranty, Status)
-        # Mapping DB result index to Table Column index:
-        # DB: 1=Name, 2=SKU, 3=Category, 4=Price, 5=Stock, 6=Status, 7=Warranty
+        products = self.db.productdb.fetch_inventory_list_data()
 
         for row_idx, product in enumerate(products):
             table.insertRow(row_idx)
 
             # 1. Product Name
-            table.setItem(row_idx, 0, QTableWidgetItem(str(product[1])))
+            table.setItem(row_idx, 0, QTableWidgetItem(str(product[0])))
 
             # 2. SKU
-            table.setItem(row_idx, 1, QTableWidgetItem(str(product[2])))
+            table.setItem(row_idx, 1, QTableWidgetItem(str(product[1])))
 
             # 3. Category
-            table.setItem(row_idx, 2, QTableWidgetItem(str(product[3])))
+            table.setItem(row_idx, 2, QTableWidgetItem(str(product[2])))
 
             # 4. Price
-            price_item = QTableWidgetItem(f"₱ {float(product[4]):,.2f}")
+            price_item = QTableWidgetItem(f"₱ {float(product[3]):,.2f}")
             price_item.setTextAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
             table.setItem(row_idx, 3, price_item)
 
             # 5. Stock
-            stock_val = int(product[5])
+            stock_val = int(product[4])
             stock_item = QTableWidgetItem(str(stock_val))
             stock_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             table.setItem(row_idx, 4, stock_item)
 
             # 6. Warranty
-            table.setItem(row_idx, 5, QTableWidgetItem(str(product[7])))
+            table.setItem(row_idx, 5, QTableWidgetItem(str(product[5])))
 
             # 7. Status
             status_text = "In Stock"

@@ -177,8 +177,7 @@ class Adminwindow:
         ]
         for page in self.pages:
             self.page.stackedWidget.addWidget(page)
-        # print(f"DEBUG: Added {len(self.pages)} pages. Total pages: {self.page.stackedWidget.count()}")
-        # print(f"DEBUG: Index 0 = Dashboard (from UI), Index 1 = {type(self.pages[0]).__name__}")
+
 
     def setup_clock(self):
         current = QDateTime.currentDateTime()

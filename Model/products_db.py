@@ -129,20 +129,20 @@ class ProductsDatabase:
         finally:
             cursor.close()
 
-    def debug_categories(self):
-        """Display all available categories in database"""
-        cursor = self.db.db.cursor()
-        cursor.execute("SELECT categoryID, categoryName FROM category ORDER BY categoryID")
-        categories = cursor.fetchall()
-        cursor.close()
-
-        print("\n=== AVAILABLE CATEGORIES ===")
-        if categories:
-            for cat_id, cat_name in categories:
-                print(f"ID: {cat_id} -> {cat_name}")
-        else:
-            print("No categories found!")
-        print("============================\n")
+    # def debug_categories(self):
+    #     """Display all available categories in database"""
+    #     cursor = self.db.db.cursor()
+    #     cursor.execute("SELECT categoryID, categoryName FROM category ORDER BY categoryID")
+    #     categories = cursor.fetchall()
+    #     cursor.close()
+    #
+    #     print("\n=== AVAILABLE CATEGORIES ===")
+    #     if categories:
+    #         for cat_id, cat_name in categories:
+    #             print(f"ID: {cat_id} -> {cat_name}")
+    #     else:
+    #         print("No categories found!")
+    #     print("============================\n")
 
         return categories
 
@@ -152,10 +152,12 @@ class ProductsDatabase:
             cursor = self.db.cursor()
             query = """
                     SELECT p.name, \
+                           p.sku,
                            c.categoryName, \
                            p.price, \
                            p.stock_quantity, \
-                           p.warranty
+                           p.warranty,
+                           p.status
                     FROM products p
                              LEFT JOIN category c ON p.categoryID = c.categoryID
                     ORDER BY p.name ASC \

@@ -17,7 +17,7 @@
    <item>
     <widget class="QFrame" name="frame_4">
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(92, 0, 173);</string>
+      <string notr="true">background-color: #2A004E;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::Shape::StyledPanel</enum>
@@ -89,9 +89,17 @@ QTableWidget::item:hover {
         <attribute name="horizontalHeaderDefaultSectionSize">
          <number>250</number>
         </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
         <column>
          <property name="text">
           <string>Product Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>SKU</string>
          </property>
         </column>
         <column>
