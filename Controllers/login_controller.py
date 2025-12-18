@@ -35,8 +35,6 @@ class LoginController:
     def login_success(self):
         print("✅ Login Success!")
         role_tuple =self.db.get_user_type(self.username)
-        print("DEBUG: Database role tuple: {role_tuple}")
-
         self.role = role_tuple[0]
 
         self.view.close()

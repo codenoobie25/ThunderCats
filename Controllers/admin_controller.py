@@ -1,13 +1,6 @@
-from PyQt6.QtCore import QTimer, QDateTime
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QMessageBox
-import matplotlib
-
-matplotlib.use('QtAgg')
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 import matplotlib.pyplot as plt
 from PyQt6.QtWidgets import QVBoxLayout
-
 from Controllers.dialog_control.OutofStock_LowStockEx_Controller import OutofStockLowStockExCntroller
 from Controllers.dialog_control.TotalRevenueEX_Controller import TotalRevenueEXController
 from Controllers.dialog_control.TotalproductEX_Controller import TotalproductEXController
@@ -23,6 +16,12 @@ from View.pages.employee_Admin import EmployeeAdmin
 from View.pages.productlist_admin import ProductListAdmin
 from View.pages.sale_reportAdmin import SaleReport
 from View.dialog.OutStockExpand import OutStockDialog
+
+from PyQt6.QtCore import QTimer, QDateTime
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QMessageBox
+import matplotlib
+matplotlib.use('QtAgg')
 
 class Adminwindow:
     def __init__(self, adminwindow, db, application):
@@ -100,6 +99,7 @@ class Adminwindow:
         self.page.close()
 
         self.application.logout()
+
     def set_up_card_button(self):
 
         if hasattr(self.page, 'totalrevenue_expand'):
@@ -110,7 +110,6 @@ class Adminwindow:
 
         if hasattr(self.page, 'outstock_expand'):
             self.page.outstock_expand.clicked.connect(self.open_outstock_dialog)
-
 
     def open_total_revenue_dialog(self):
         revenue_data = self.db.admindb.get_revenue_details()
@@ -142,7 +141,6 @@ class Adminwindow:
 
         if hasattr(self.page, 'totalProduct'):
             self.page.totalProduct.setText(str(total_items))
-
 
     def update_out_of_stock_total(self):
 
@@ -177,7 +175,6 @@ class Adminwindow:
         ]
         for page in self.pages:
             self.page.stackedWidget.addWidget(page)
-
 
     def setup_clock(self):
         current = QDateTime.currentDateTime()
@@ -234,7 +231,7 @@ class Adminwindow:
         x_days = days_order
         y_amounts = [sales_map[day] for day in days_order]
 
-        fig, ax = plt.subplots(figsize=(5, 3))  # Size doesn't matter much, layout handles it
+        fig, ax = plt.subplots(figsize=(5, 3))
 
         fig.patch.set_facecolor('none')
         ax.set_facecolor('none')
@@ -248,7 +245,6 @@ class Adminwindow:
         ax.spines['top'].set_color('none')
         ax.spines['right'].set_color('none')
 
-        # Add labels (Optional)
         ax.set_ylabel('Sales', color='white')
 
         target_widget = self.page.WeeklyRevChart

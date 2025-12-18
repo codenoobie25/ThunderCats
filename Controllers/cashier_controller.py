@@ -9,8 +9,6 @@ from View.dialog.checkout_cashierUI import CheckoutCashier
 from View.pages.InventoryList import inventorylistcashier
 
 class CashierController:
-
-
     def __init__(self, cashierwindow, db, application):
         self.page = cashierwindow
         self.db = db
@@ -54,14 +52,6 @@ class CashierController:
             self.page.ProductList.clicked.connect(lambda: self.switch_page(1))
 
     def switch_page(self, index):
-        if hasattr(self.page, 'stackedWidget'):
-            print(f"DEBUG: Switching to page index {index}")
-            self.page.stackedWidget.setCurrentIndex(index)
-
-            if index == 1:
-                self.load_inventory_table()
-
-    def switch_page(self, index):
 
         if hasattr(self.page, 'stackedWidget'):
             self.page.stackedWidget.setCurrentIndex(index)
@@ -70,7 +60,6 @@ class CashierController:
                 self.load_inventory_table()
 
     def load_inventory_table(self):
-        print("DEBUG: Loading Cashier Inventory Table...")
 
         if not hasattr(self.inventory_page, 'tableWidget'):
             print("ERROR: tableWidget not found in inventory page")
@@ -125,6 +114,7 @@ class CashierController:
 
         header = table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+
     def init_ui_areas(self):
         """Initialize the product grid and cart scroll areas"""
         if hasattr(self.page, 'scrollArea_products'):
@@ -291,9 +281,6 @@ class CashierController:
             import traceback
             traceback.print_exc()
 
-    # def get_current_user_id(self):
-    #     return 1
-
     def clear_cart_after_checkout(self):
         for widget in self.cart_items.values():
             self.cart_layout.removeWidget(widget)
@@ -302,10 +289,8 @@ class CashierController:
         self.cart_items.clear()
         self.calculate_totals()
 
-        print("DEBUG: Refreshing product list...")
         self.fetch_and_store_products()
         self.display_products()
-
 
     def setup_clock(self):
 

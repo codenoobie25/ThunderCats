@@ -67,18 +67,28 @@ class SaleReportController:
                     self.ui.date_end.date().toString("yyyy-MM-dd 23:59:59"))
 
         now = datetime.now()
-        end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
-        start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+
 
         if clean_filter == "This Day":
-            pass  # Start is already today
+            start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
         elif clean_filter == "This Week":
-            start -= timedelta(days=7)
+            start = now - timedelta(days=now.weekday())  # ← FIXED
+            start = start.replace(hour=0, minute=0, second=0, microsecond=0)
+            end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
         elif clean_filter == "This Month":
-            start = start.replace(day=1)
+            start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+            end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
         elif clean_filter == "Full Report":
             start = datetime(2000, 1, 1, 0, 0, 0)
-            print("DEBUG: Full Report Mode Activated (Start Date: 2000-01-01)")
+            end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+        else:
+            start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+            end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
         start_str = start.strftime('%Y-%m-%d %H:%M:%S')
         end_str = end.strftime('%Y-%m-%d %H:%M:%S')

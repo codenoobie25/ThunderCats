@@ -69,10 +69,6 @@ class EmployeeController:
             for role_id, role_name in roles:
                 combo_box.addItem(role_name, role_id)
 
-    # ==========================================
-    #           ADD / EDIT LOGIC
-    # ==========================================
-
     def open_add_dialog(self):
         try:
             self.dialog = addemployeeDialog()
@@ -96,18 +92,14 @@ class EmployeeController:
             print(f"DEBUG: Starting open_edit_dialog with row_data: {row_data}")
             self.current_edit_id = row_data[0]
 
-            print("DEBUG: Creating dialog")
             self.dialog = addemployeeDialog()
 
-            print("DEBUG: Setting window properties")
             self.dialog.setWindowTitle("Edit Employee")
             self.dialog.Header.setText("Edit Employee")
             self.dialog.addButton.setText("Save Changes")
 
-            print("DEBUG: Populating role combobox")
             self.populate_role_combobox(self.dialog.Rolebox)
 
-            print("DEBUG: Setting text fields")
             self.dialog.firstName.setText(row_data[1])
             self.dialog.lastName.setText(row_data[2])
             self.dialog.Emailadd.setText(row_data[5])
@@ -116,7 +108,6 @@ class EmployeeController:
             self.dialog.city.setText(row_data[9])
             self.dialog.province.setText(row_data[10])
 
-            print("DEBUG: Setting role combobox")
             role_id_from_db = row_data[11]
             print(f"DEBUG: role_id_from_db = {role_id_from_db}")
             idx = self.dialog.Rolebox.findData(role_id_from_db)
@@ -124,7 +115,6 @@ class EmployeeController:
             if idx >= 0:
                 self.dialog.Rolebox.setCurrentIndex(idx)
 
-            print("DEBUG: Setting status combobox")
             status_text = row_data[4]
             print(f"DEBUG: status_text = {status_text}")
             status_idx = self.dialog.empstatus.findText(status_text)
@@ -132,18 +122,15 @@ class EmployeeController:
             if status_idx >= 0:
                 self.dialog.empstatus.setCurrentIndex(status_idx)
 
-            print("DEBUG: Setting date")
             db_date_str = str(row_data[6])
             print(f"DEBUG: db_date_str = {db_date_str}")
             qdate = QDate.fromString(db_date_str, "yyyy-MM-dd")
             print(f"DEBUG: qdate = {qdate}")
             self.dialog.datejoin.setDate(qdate)
 
-            print("DEBUG: Connecting buttons")
             self.dialog.addButton.clicked.connect(self.save_employee_from_dialog)
             self.dialog.cancelButton.clicked.connect(self.dialog.close)
 
-            print("DEBUG: Showing dialog")
             self.dialog.exec()
 
         except Exception as e:
@@ -180,7 +167,7 @@ class EmployeeController:
                 QMessageBox.warning(self.dialog, "Missing Data", "Please fill in First Name and Last Name.")
                 return
 
-            if role_id is None:  # ← IMPORTANT CHECK
+            if role_id is None:
                 print("DEBUG: Missing role")
                 QMessageBox.warning(self.dialog, "Missing Data", "Please select a Role.")
                 return

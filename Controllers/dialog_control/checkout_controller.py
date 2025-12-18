@@ -57,7 +57,6 @@ class CheckoutCashierController:
                 QMessageBox.warning(self.ui, "Empty Cart", "Please add items to cart first.")
                 return
 
-            print("DEBUG: Validating cash input")
             try:
                 cash_tendered = float(self.ui.changedue2.text())
                 print(f"DEBUG: Cash tendered: {cash_tendered}")
@@ -66,14 +65,12 @@ class CheckoutCashierController:
                 return
 
             total = self.get_total()
-            print(f"DEBUG: Total amount: {total}")
 
             if cash_tendered < total:
                 QMessageBox.warning(self.ui, "Insufficient Payment",
                                     f"Cash tendered (₱{cash_tendered:.2f}) is less than total (₱{total:.2f}).")
                 return
 
-            print("DEBUG: Showing confirmation dialog")
             confirm = QMessageBox.question(self.ui, "Confirm Order",
                                            f"Complete order for ₱{total:.2f}?",
                                            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
@@ -83,7 +80,6 @@ class CheckoutCashierController:
                 print(f"DEBUG: sales_db object: {self.sales_db}")
                 print(f"DEBUG: sales_db type: {type(self.sales_db)}")
 
-
                 # Process transaction
                 result = self.sales_db.complete_transaction(
                     self.cart_items,
@@ -91,7 +87,6 @@ class CheckoutCashierController:
                     cash_tendered
                 )
 
-                print(f"DEBUG: Transaction result: {result}")
 
                 if result:
                     print("DEBUG: Transaction successful")
@@ -110,8 +105,7 @@ class CheckoutCashierController:
                                             f"Transaction completed!\nReceipt: {result['receipt_number']}")
                 else:
                     QMessageBox.critical(self.ui, "Error", "Failed to process transaction.")
-            else:
-                print("DEBUG: User cancelled order")
+
 
         except Exception as e:
             print(f"ERROR in complete_order: {e}")
@@ -121,11 +115,8 @@ class CheckoutCashierController:
 
     def show_receipt(self, transaction_data):
         try:
-            print(f"DEBUG: show_receipt called with data: {transaction_data}")
             self.receipt_controller = ReceiptC_C_C(transaction_data)
-            print("DEBUG: Receipt controller created")
             self.receipt_controller.show()
-            print("DEBUG: Receipt shown")
         except Exception as e:
             print(f"ERROR in show_receipt: {e}")
             import traceback

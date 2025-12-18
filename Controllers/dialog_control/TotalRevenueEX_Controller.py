@@ -12,7 +12,6 @@ class TotalRevenueEXController:
     def update_ui(self):
 
         if hasattr(self.view, 'grosssale'):
-            # Format as currency with comma separator (e.g., 1,200.00)
             formatted_sale = "{:,.2f}".format(self.data['gross_sale'])
             self.view.grosssale.setText(formatted_sale)
 
@@ -29,9 +28,9 @@ class TotalRevenueEXController:
             self.view.totalcash.setText(str(count))
 
         if hasattr(self.view, 'totalcard'):
-            count = payment_counts.get('Credit', 0)
+            count = payment_counts.get('Credit Card', 0)
             self.view.totalcard.setText(str(count))
 
         if hasattr(self.view, 'totalEwallet'):
-            count = payment_counts.get('GCash', 0)
+            count = payment_counts.get('E-wallet', 0)
             self.view.totalEwallet.setText(str(count))

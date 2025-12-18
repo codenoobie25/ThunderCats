@@ -129,22 +129,6 @@ class ProductsDatabase:
         finally:
             cursor.close()
 
-    # def debug_categories(self):
-    #     """Display all available categories in database"""
-    #     cursor = self.db.db.cursor()
-    #     cursor.execute("SELECT categoryID, categoryName FROM category ORDER BY categoryID")
-    #     categories = cursor.fetchall()
-    #     cursor.close()
-    #
-    #     print("\n=== AVAILABLE CATEGORIES ===")
-    #     if categories:
-    #         for cat_id, cat_name in categories:
-    #             print(f"ID: {cat_id} -> {cat_name}")
-    #     else:
-    #         print("No categories found!")
-    #     print("============================\n")
-
-        return categories
 
     def fetch_inventory_list_data(self):
         if not self.db: return []

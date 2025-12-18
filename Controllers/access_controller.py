@@ -108,7 +108,7 @@ class AccessController:
             return
 
         dialog = AddRoles()
-        dialog.RoleName.setText("Add User Access")
+        dialog.RoleName.setText("Username:")
 
         dialog.userID.clear()
         for emp_id, full_name, role_name in employees:

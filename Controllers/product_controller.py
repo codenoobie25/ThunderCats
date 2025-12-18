@@ -13,14 +13,11 @@ class ProductController:
         self.load_categories()
 
     def setup_ui(self):
-        # Connect add button
         self.productlist_pages.addProduct.clicked.connect(self.show_add_product_dialog)
 
-        # Connect refresh button if exists
         if hasattr(self.productlist_pages, 'refresh_btn'):
             self.productlist_pages.refresh_btn.clicked.connect(self.load_products)
 
-        # Setup table context menu
         self.productlist_pages.product_table.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.productlist_pages.product_table.customContextMenuRequested.connect(self.show_context_menu)
 
@@ -53,18 +50,15 @@ class ProductController:
 
         table = self.productlist_pages.product_table
 
-        # Create widget for buttons
         widget = QWidget()
         layout = QHBoxLayout(widget)
         layout.setContentsMargins(4, 4, 4, 4)
 
-        # Edit button
         edit_btn = QPushButton("✏️")
         edit_btn.setToolTip("Edit Product")
         edit_btn.clicked.connect(lambda: self.edit_product(product_id))
         edit_btn.setFixedSize(30, 25)
 
-        # Delete button
         delete_btn = QPushButton("🗑️")
         delete_btn.setToolTip("Delete Product")
         delete_btn.clicked.connect(lambda: self.delete_product(product_id))
@@ -80,7 +74,6 @@ class ProductController:
         self.categories = self.db.get_all_categories()
 
     def show_add_product_dialog(self):
-
         dialog = AddProduct()
         dialog.setWindowTitle("Add Product")
 
@@ -139,10 +132,10 @@ class ProductController:
             dialog.cancelButton.clicked.connect(dialog.reject)
 
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            self.load_products()  # Refresh table
+            self.load_products()
 
     def edit_product(self, product_id):
-        print(f"DEBUG: Editing product {product_id}")  # Add debug
+        print(f"DEBUG: Editing product {product_id}")
         try:
             self.show_edit_product_dialog(product_id)
         except Exception as e:
@@ -151,13 +144,10 @@ class ProductController:
             traceback.print_exc()
 
     def save_product(self, dialog):
-        """Save new product to database"""
         try:
-            # Get data from dialog - FIXED: Use consistent attribute names
             name = dialog.addproductName.text().strip() if hasattr(dialog, 'addproductName') else ""
             category_id = dialog.combocategories.currentData() if hasattr(dialog, 'combocategories') else None
 
-            # Fixed: Check the SAME attributes we're accessing
             price = dialog.prices.value() if hasattr(dialog, 'prices') else 0.0
             stock = dialog.Stockqty.value() if hasattr(dialog, 'Stockqty') else 0
 
@@ -175,8 +165,6 @@ class ProductController:
 
             sku = self.db.generate_sku()
             product_id = self.db.generate_product_id()
-            # Save to database
-
             success = self.db.add_product(product_id,name, sku, category_id, price, stock, warranty,status)
 
             if success:
@@ -196,11 +184,9 @@ class ProductController:
     def update_product(self, product_id, dialog):
         """Update existing product in database"""
         try:
-            # Get data from dialog - FIXED: Use consistent attribute names
             name = dialog.addproductName.text() if hasattr(dialog, 'addproductName') else ""
             category_id = dialog.combocategories.currentData() if hasattr(dialog, 'combocategories') else None
 
-            # Fixed: Check the SAME attributes we're accessing
             price_text = dialog.prices.text() if hasattr(dialog, 'prices') else ""
             price = float(price_text) if price_text else 0.0
 
@@ -256,5 +242,4 @@ class ProductController:
                 QMessageBox.critical(self.productlist_pages, "Error", "Failed to delete product!")
 
     def show_context_menu(self, position):
-
         pass

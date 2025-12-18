@@ -12,7 +12,6 @@ class ReceiptC_C_C:
         self.ui = self.dialog
 
     def populate_receipt(self):
-        """Fill receipt with transaction data"""
         data = self.transaction_data
 
         self.ui.Receiptnumber.setText(data['receipt_number'])
@@ -34,7 +33,6 @@ class ReceiptC_C_C:
         scroll_layout = QVBoxLayout(scroll_widget)
         scroll_layout.setContentsMargins(15, 15, 15, 15)
 
-        # Build the receipt text
         receipt_text = "ITEMS PURCHASED\n"
         receipt_text += "═" * 35 + "\n\n"
 
