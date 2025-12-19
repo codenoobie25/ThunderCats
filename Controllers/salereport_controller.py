@@ -74,7 +74,7 @@ class SaleReportController:
             end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
         elif clean_filter == "This Week":
-            start = now - timedelta(days=now.weekday())  # ← FIXED
+            start = now - timedelta(days=now.weekday())
             start = start.replace(hour=0, minute=0, second=0, microsecond=0)
             end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
