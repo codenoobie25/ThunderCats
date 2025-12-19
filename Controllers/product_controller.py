@@ -27,7 +27,7 @@ class ProductController:
 
         table.setRowCount(0)
 
-        # Set column count
+
         table.setColumnCount(8)
 
         headers = ["ID", "Name", "SKU", "Category", "Price", "Stock", "Status", "Warranty", "Actions"]
