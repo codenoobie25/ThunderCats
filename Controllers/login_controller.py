@@ -1,4 +1,5 @@
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QLineEdit
+
 
 class LoginController:
     def __init__(self, login_view, db, main_app):
@@ -9,6 +10,7 @@ class LoginController:
         self.username = None
         self.password = None
         self.role = None
+        self.view.showpassword.stateChanged.connect(self.toggle_password_visibility)
         self.view.LoginBtn.clicked.connect(self.attempt_login)
 
     def attempt_login(self):
@@ -43,3 +45,9 @@ class LoginController:
     def login_fail(self):
         print("❌ Login Failed.")
         QMessageBox.warning(self.view, "Login Error", "Invalid Username or Password")
+
+    def toggle_password_visibility(self):
+        if self.view.showpassword.isChecked():
+            self.view.lineEdit_Password.setEchoMode(QLineEdit.EchoMode.Normal)
+        else:
+            self.view.lineEdit_Password.setEchoMode(QLineEdit.EchoMode.Password)

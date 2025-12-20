@@ -1112,7 +1112,7 @@
         </palette>
        </property>
        <property name="echoMode">
-        <enum>QLineEdit::EchoMode::Password</enum>
+        <enum>QLineEdit::EchoMode::Normal</enum>
        </property>
       </widget>
      </item>

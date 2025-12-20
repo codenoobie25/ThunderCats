@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>420</width>
-    <height>480</height>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
     border: 2px solid #520099;  
 }
 QLabel#Header, QLabel#Header2 {
-    color: #FFD500;             
+    color: #FFD500;              
     font-size: 16px;            
     font-weight: bold;
     border-bottom: 2px solid #520099; 
@@ -35,13 +35,13 @@ QFrame#frame {
     border: 2px solid #FFD500; 
 }
 
-QLabel#headerTotal {          
-    color: #E0C2FF;           
+QLabel#headerTotal {           
+    color: #E0C2FF;            
     font-size: 14px;
 }
 
-QLabel#Totalamountdue {        
-    color: #FFD500;              
+QLabel#Totalamountdue {         
+    color: #FFD500;               
     font-weight: bold;
     font-size: 36px;             
 }
@@ -53,17 +53,34 @@ QLabel#subtotaHeader, QLabel#taxHeader {
 }
 QLabel#changedues {
     color: #FFFFFF;             
-    font-size: 18px;           
+    font-size: 18px;            
     font-weight: bold;          
 }
 QLineEdit#changedue2 {
     background-color: #FFFFFF;   
-    color: #2A004E;              
-    border: 2px solid #FFD500;   
+    color: #2A004E;               
+    border: 2px solid #FFD500;    
     border-radius: 8px;
-    font-size: 24px;           
+    font-size: 24px;            
     font-weight: bold;
     padding: 10px;
+}
+
+/* NEW BUTTON STYLES FOR PAYMENT METHODS */
+QPushButton#btn_Cash, QPushButton#btn_Gcash, QPushButton#btn_CreditCard {
+    background-color: #2A004E;
+    color: #FFD500;
+    border: 2px solid #FFD500;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: bold;
+}
+QPushButton#btn_Cash:hover, QPushButton#btn_Gcash:hover, QPushButton#btn_CreditCard:hover {
+    background-color: #3D0070;
+}
+QPushButton#btn_Cash:checked, QPushButton#btn_Gcash:checked, QPushButton#btn_CreditCard:checked {
+    background-color: #FFD500;
+    color: #2A004E;
 }
 
 
@@ -72,7 +89,7 @@ QLabel#changedues {
 }
 
 QLabel#totalchange {
-    color: #FFFFFF;              
+    color: #FFFFFF;               
     font-size: 28px;
     font-weight: bold;
 }
@@ -80,7 +97,7 @@ QLabel#totalchange {
 
 QPushButton#completeOrder {
     background-color: #FFD500;   
-    color: #2A004E;           
+    color: #2A004E;            
     font-weight: bold;
     font-size: 18px;
     border-radius: 8px;
@@ -103,6 +120,43 @@ QPushButton#completeOrder:pressed {
       <string>Payment</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_PaymentMethods">
+     <item>
+      <widget class="QPushButton" name="btn_Cash">
+       <property name="text">
+        <string>Cash</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_Gcash">
+       <property name="text">
+        <string>Gcash</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_CreditCard">
+       <property name="text">
+        <string>Credit Card</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QFrame" name="frame">
