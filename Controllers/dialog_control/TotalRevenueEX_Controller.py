@@ -1,5 +1,3 @@
-from PyQt6.QtWidgets import QLabel
-
 
 class TotalRevenueEXController:
     def __init__(self, view, data):

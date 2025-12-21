@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1197</width>
-    <height>549</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="palette">
@@ -434,9 +434,9 @@
      <colorrole role="AlternateBase">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>92</red>
-        <green>0</green>
-        <blue>173</blue>
+        <red>173</red>
+        <green>127</green>
+        <blue>214</blue>
        </color>
       </brush>
      </colorrole>
@@ -752,7 +752,7 @@ QPushButton#btn_export:pressed {
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../.designer/assets/FileExport.svg</normaloff>../../../.designer/assets/FileExport.svg</iconset>
+             <normaloff>../assets/FileExport.svg</normaloff>../assets/FileExport.svg</iconset>
            </property>
           </widget>
          </item>
@@ -767,8 +767,51 @@ QPushButton#btn_export:pressed {
         <property name="frameShadow">
          <enum>QFrame::Shadow::Raised</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
+        <layout class="QGridLayout" name="gridLayout_Cards">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btn_transactionHistory">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton#btn_transactionHistory {
+	background-color: transparent;
+	color: #FFD500;
+	border: 2px solid #FFD500;
+	border-radius: 8px;
+	font-weight: bold;
+	font-size: 14px;
+}
+QPushButton#btn_transactionHistory:hover {
+	background-color: #3D1459;
+}
+QPushButton#btn_transactionHistory:pressed {
+	background-color: #FFD500;
+	color: #2A004E;
+}</string>
+           </property>
+           <property name="text">
+            <string>View Transaction History</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../assets/history_icon.svg</normaloff>../assets/history_icon.svg</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
           <widget class="QFrame" name="Total_sales">
            <property name="styleSheet">
             <string notr="true">
@@ -783,15 +826,15 @@ QFrame#Total_sales {
 
 
 QLabel#title1 {
-    color: #FFD500;            
+    color: #FFD500;             
     font-weight: bold; /* Readable size */
     background-color: transparent;
 }
 
 
 QLabel#lbl_revenue {
-    color: #FFFFFF;           
-    font-size: 24px;           
+    color: #FFFFFF;            
+    font-size: 24px;            
     font-weight: bold;
     background-color: transparent;
 }</string>
@@ -842,7 +885,7 @@ QLabel#lbl_revenue {
            </layout>
           </widget>
          </item>
-         <item>
+         <item row="1" column="1">
           <widget class="QFrame" name="Average">
            <property name="styleSheet">
             <string notr="true">
@@ -857,15 +900,15 @@ QFrame#Average {
 
 
 QLabel#title2 {
-    color: #FFD500;            
+    color: #FFD500;             
     font-weight: bold; 
     background-color: transparent;
 }
 
 
 QLabel#lbl_ticket {
-    color: #FFFFFF;           
-    font-size: 24px;           
+    color: #FFFFFF;            
+    font-size: 24px;            
     font-weight: bold;
     background-color: transparent;
 }</string>
@@ -909,7 +952,7 @@ QLabel#lbl_ticket {
            </layout>
           </widget>
          </item>
-         <item>
+         <item row="1" column="2">
           <widget class="QFrame" name="Top_category">
            <property name="styleSheet">
             <string notr="true">
@@ -924,15 +967,15 @@ QFrame#Top_category {
 
 
 QLabel#title3 {
-    color: #FFD500;            
+    color: #FFD500;             
     font-weight: bold; /* Readable size */
     background-color: transparent;
 }
 
 
 QLabel#lbl_category {
-    color: #FFFFFF;           
-    font-size: 24px;           
+    color: #FFFFFF;            
+    font-size: 24px;            
     font-weight: bold;
     background-color: transparent;
 }</string>
@@ -1052,50 +1095,6 @@ border-radius: 5px;</string>
            </attribute>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QPushButton" name="transactionHistory">
-             <property name="styleSheet">
-              <string notr="true">QPushButton#transactionHistory {
-    background-color: transparent;
-    color: #FFFFFF;
-    border: 2px solid #520099;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 11px;
-    padding: 10px 20px;
-}
-
-QPushButton#transactionHistory:hover {
-    background-color: #520099; 
-    color: #FFFFFF;
-}</string>
-             </property>
-             <property name="text">
-              <string>Transaction History</string>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>../assets/history_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</normaloff>../assets/history_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Orientation::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
         </layout>
        </widget>
       </item>
@@ -1104,8 +1103,6 @@ QPushButton#transactionHistory:hover {
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../../Downloads/icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

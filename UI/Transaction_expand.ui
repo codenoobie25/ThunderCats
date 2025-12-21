@@ -506,7 +506,7 @@
       <string notr="true">color: #ffd500</string>
      </property>
      <property name="text">
-      <string>Sales Details</string>
+      <string>Transaction History</string>
      </property>
     </widget>
    </item>
@@ -545,27 +545,32 @@ QTableWidget::item:hover {
      </column>
      <column>
       <property name="text">
-       <string>Sale ID</string>
+       <string>Date &amp; Time</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Product ID</string>
+       <string>Customer</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Quantity</string>
+       <string>Items Counts</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Unit price</string>
+       <string>Total Amount</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Subtotal</string>
+       <string>Payment Method</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Status</string>
       </property>
      </column>
     </widget>

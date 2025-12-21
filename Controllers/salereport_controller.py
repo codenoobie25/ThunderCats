@@ -14,11 +14,15 @@ from reportlab.lib.pagesizes import letter, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 
+from View.dialog.Transaction_Expand import TransactionDialog
+
 
 class SaleReportController:
     def __init__(self, salereport_pages, adminWindow_controller):
         self.ui = salereport_pages
         self.db = adminWindow_controller.db
+
+        self.setUptransactionButton()
 
         self.chart_layout = self.ui.widget_chart_container.layout()
         if self.chart_layout is None:
@@ -280,3 +284,14 @@ class SaleReportController:
             QDesktopServices.openUrl(QUrl.fromLocalFile(file_path))
         else:
             QMessageBox.warning(self.ui, "Error", "File not found! It may have been moved or deleted.")
+
+    def setUptransactionButton(self):
+        if hasattr(self.ui, 'transactionHistory'):
+            self.ui.transactionHistory.clicked.connect(self.openTransactionHistory)
+
+    def openTransactionHistory(self):
+        dialog = TransactionDialog()
+
+        dialog.closeButton.clicked.connect(dialog.close)
+        dialog.exec()
+
